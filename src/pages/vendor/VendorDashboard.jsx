@@ -25,7 +25,6 @@ import VendorStatsGrid from "./VendorStatsGrid";
 import VendorProfileForm from "./VendorProfileForm";
 // import VendorRecentOrdersTable from "./VendorRecentOrdersTable";
 import VendorOrdersList from "./VendorOrdersList";
-import VendorRelayPointsList from "./VendorRelayPointsList";
 import VendorPerformanceStats from "./VendorPerformanceStats";
 import VendorSettingsNotifications from "./VendorSettingsNotifications";
 import VendorSettingsDelivery from "./VendorSettingsDelivery";
@@ -229,7 +228,9 @@ const VendorDashboard = () => {
             <VendorStatsGrid stats={mockData.stats} />
             {/* Google Map with Relay Points */}
             <div className="bg-white rounded-2xl shadow-soft p-4">
-              <h2 className="text-xl font-bold mb-4">نقاط الترحيل على الخريطة</h2>
+              <h2 className="text-xl font-bold mb-4">
+                نقاط الترحيل على الخريطة
+              </h2>
               <VendorRelayPointsMap relayPoints={mockData.relayPoints} />
             </div>
           </div>
@@ -239,7 +240,9 @@ const VendorDashboard = () => {
         {activeTab === "orders" && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-neutral-800">إدارة الطلبات</h3>
+              <h3 className="text-2xl font-bold text-neutral-800">
+                إدارة الطلبات
+              </h3>
               <div className="flex gap-4">
                 <select className="input-field w-40">
                   <option>جميع الحالات</option>
@@ -250,7 +253,11 @@ const VendorDashboard = () => {
                 </select>
                 <div className="relative">
                   <MagnifyingGlassIcon className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-                  <input type="text" placeholder="البحث في الطلبات..." className="input-field pr-10 w-64" />
+                  <input
+                    type="text"
+                    placeholder="البحث في الطلبات..."
+                    className="input-field pr-10 w-64"
+                  />
                 </div>
                 <button className="btn-primary gap-2">
                   <PlusIcon className="w-5 h-5" />
@@ -271,20 +278,27 @@ const VendorDashboard = () => {
         {activeTab === "relay-points" && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-neutral-800">نقاط الترحيل المتاحة</h3>
+              <h3 className="text-2xl font-bold text-neutral-800">
+                نقاط الترحيل المتاحة
+              </h3>
               <div className="relative">
                 <MagnifyingGlassIcon className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-                <input type="text" placeholder="البحث في نقاط الترحيل..." className="input-field pr-10 w-64" />
+                <input
+                  type="text"
+                  placeholder="البحث في نقاط الترحيل..."
+                  className="input-field pr-10 w-64"
+                />
               </div>
             </div>
-            <VendorRelayPointsList relayPoints={mockData.relayPoints} />
           </div>
         )}
 
         {/* Profile Tab */}
         {activeTab === "profile" && (
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-neutral-800">الملف الشخصي</h3>
+            <h3 className="text-2xl font-bold text-neutral-800">
+              الملف الشخصي
+            </h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <VendorProfileForm />
               <VendorPerformanceStats />

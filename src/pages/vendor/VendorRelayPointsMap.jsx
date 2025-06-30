@@ -1,11 +1,10 @@
-import React from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 
 // Example static coordinates for relay points (replace with real ones if available)
 const relayPointsCoords = {
   "متجر الأمين": { lat: 36.7538, lng: 3.0588 }, // Algiers
   "سوبر ماركت النور": { lat: 35.6971, lng: -0.6308 }, // Oran
-  "مكتبة المعرفة": { lat: 36.3650, lng: 6.6147 }, // Constantine
+  "مكتبة المعرفة": { lat: 36.365, lng: 6.6147 }, // Constantine
   "صيدلية الشفاء": { lat: 36.9063, lng: 7.7558 }, // Annaba
 };
 
@@ -46,4 +45,4 @@ const VendorRelayPointsMap = ({ relayPoints }) => {
   );
 };
 
-export default VendorRelayPointsMap; 
+export default VendorRelayPointsMap;
