@@ -15,6 +15,7 @@ import {
   ClockIcon,
   CheckCircleIcon,
 } from "@heroicons/react/24/outline";
+import logo from "../../assets/logo.png";
 
 const roles = [
   { value: "vendor", label: "بائع", icon: BuildingStorefrontIcon },
@@ -68,16 +69,8 @@ const AuthRegister = () => {
         {/* Left: Form */}
         <div className="w-full lg:w-1/2 p-12 flex flex-col justify-center">
           {/* Logo */}
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-2 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl shadow-soft">
-              <TruckIcon className="w-7 h-7 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold gradient-text">نقطة</span>
-              <span className="text-xs font-medium text-neutral-500 -mt-1">
-                DZ
-              </span>
-            </div>
+          <div className="flex items-center justify-center mb-8">
+            <img src={logo} alt="Logo" className="w-32 h-32 object-contain" />
           </div>
 
           <h2 className="text-4xl font-bold text-neutral-800 mb-2">

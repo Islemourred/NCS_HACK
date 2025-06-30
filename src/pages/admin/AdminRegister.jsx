@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserIcon, EnvelopeIcon, KeyIcon, CheckCircleIcon, TruckIcon } from "@heroicons/react/24/outline";
+import logo from "../../assets/logo.png";
 
 const AdminRegister = () => {
   const navigate = useNavigate();
@@ -29,12 +30,8 @@ const AdminRegister = () => {
       <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl flex overflow-hidden border border-gray-100">
         {/* Left: Form */}
         <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
-          <div className="mb-8 flex items-center gap-2">
-            <span className="text-2xl font-extrabold text-primary flex items-center gap-2">
-              <TruckIcon className="w-7 h-7 text-primary" />
-              <span className="text-2xl font-bold gradient-text">ColisPoint</span>
-              <span className="text-xs font-medium text-primary-700 -mt-1">DZ</span>
-            </span>
+          <div className="flex items-center justify-center mb-8">
+            <img src={logo} alt="Logo" className="w-32 h-32 object-contain" />
           </div>
           <h2 className="text-3xl font-bold mb-2">Create Admin Account</h2>
           <p className="text-gray-500 mb-8">Sign up as an admin to manage the ColisPoint DZ platform.</p>

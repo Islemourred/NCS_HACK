@@ -8,6 +8,7 @@ import {
   BuildingStorefrontIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -26,16 +27,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="p-2 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl shadow-soft group-hover:shadow-medium transition-all duration-200">
-              <TruckIcon className="w-7 h-7 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-2xl font-bold gradient-text">نقطة</span>
-              <span className="text-xs font-medium text-neutral-500 -mt-1">
-                DZ
-              </span>
-            </div>
+          <Link to="/" className="flex items-center group h-20">
+            <img src={logo} alt="Logo" className="w-32 h-32 object-contain mx-auto" />
           </Link>
 
           {/* Navigation Items */}

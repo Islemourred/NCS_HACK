@@ -1,0 +1,30 @@
+{
+  "appName": "Nuqta",
+  "tagline": "Parcel Management Platform",
+  "signIn": "Sign In",
+  "joinUs": "Join Us",
+  "adminPanel": "Admin Panel",
+  "vendorDashboard": "Vendor Dashboard",
+  "relayDashboard": "Relay Dashboard",
+  "logout": "Logout",
+  "adminLogin": "Admin Login",
+  "adminLoginDesc": "Sign in to your admin account to access your dashboard.",
+  "email": "Email Address",
+  "password": "Password",
+  "enterEmail": "Enter your email",
+  "enterPassword": "Enter your password",
+  "demoCredentials": "Demo Credentials:",
+  "howItWorks": "How It Works",
+  "trackYourPackage": "Track Your Package",
+  "whyChoose": "Why Choose Nuqta?",
+  "features": {
+    "fastDelivery": "Fast Delivery Network",
+    "fastDeliveryDesc": "Decentralized pickup points across Algeria for faster, more reliable deliveries.",
+    "localPartnerships": "Local Partnerships",
+    "localPartnershipsDesc": "Empowering local businesses as relay points, creating economic opportunities.",
+    "secureTracked": "Secure & Tracked",
+    "secureTrackedDesc": "Complete tracking from pickup to delivery with secure PIN/QR verification.",
+    "costEffective": "Cost Effective",
+    "costEffectiveDesc": "Reduce failed delivery costs and optimize logistics for all parties."
+  }
+} 

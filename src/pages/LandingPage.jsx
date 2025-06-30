@@ -15,6 +15,8 @@ import {
   SparklesIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
+import logo from "../assets/logo.png";
+import logo2 from "../assets/logo2.png";
 
 const features = [
   {
@@ -100,9 +102,9 @@ const LandingPage = () => {
               ثورة في شبكة التوصيل الجزائرية
             </div>
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
-              <span className="gradient-text">نقطة</span>
+              <span className="gradient-text">وصلي</span>
               <br />
-              <span className="text-neutral-800">DZ</span>
+              <span className="text-neutral-800">!Wassaley</span>
             </h1>
             <p className="text-xl text-neutral-600 mb-8 max-w-2xl leading-relaxed">
               منصة لوجستية لامركزية تربط البائعين ونقاط الترحيل والعملاء.
@@ -135,7 +137,7 @@ const LandingPage = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-primary-200 to-secondary-200 rounded-3xl -rotate-6 opacity-20"></div>
               <div className="w-full h-full bg-white rounded-3xl shadow-strong p-8 relative z-10 flex items-center justify-center">
                 <div className="text-center">
-                  <TruckIcon className="w-32 h-32 text-primary-500 mx-auto mb-4" />
+                  <img src={logo} alt="Logo" className="w-64 h-64 mx-auto" />
                   <h3 className="text-2xl font-bold text-neutral-800 mb-2">
                     لوجستيات ذكية
                   </h3>
@@ -151,7 +153,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-neutral-800 mb-4">
-              لماذا تختار ColisPoint DZ؟
+              لماذا تختار نقطة؟
             </h2>
             <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
               نحن نحول تجربة التوصيل عبر الجزائر بالتكنولوجيا المبتكرة والشراكات
@@ -206,9 +208,6 @@ const LandingPage = () => {
                   </h3>
                   <p className="text-neutral-600">{step.description}</p>
                 </div>
-                {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-primary-300 to-secondary-300 transform -translate-y-1/2 z-10"></div>
-                )}
               </div>
             ))}
           </div>
@@ -253,7 +252,7 @@ const LandingPage = () => {
                   </div>
                 ) : (
                   <>
-                    <TruckIcon className="w-6 h-6" />
+                    <TruckIcon className="w-6 h-6 mx-2" />
                     تتبع الطرد
                   </>
                 )}
@@ -347,11 +346,8 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="bg-neutral-900 text-white py-12 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="p-2 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl">
-              <TruckIcon className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-2xl font-bold">ColisPoint DZ</span>
+          <div className="flex items-center justify-center mb-6">
+            <img src={logo2} alt="Logo" className="w-32 h-32 object-contain" />
           </div>
           <p className="text-neutral-400 mb-4">
             تحويل لوجستيات التوصيل عبر الجزائر، طرد واحد في كل مرة.

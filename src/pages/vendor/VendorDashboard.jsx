@@ -20,6 +20,59 @@ import {
   BuildingStorefrontIcon,
   DocumentTextIcon,
 } from "@heroicons/react/24/outline";
+import VendorTabsNav from "./VendorTabsNav";
+import VendorStatsGrid from "./VendorStatsGrid";
+import VendorProfileForm from "./VendorProfileForm";
+// import VendorRecentOrdersTable from "./VendorRecentOrdersTable";
+import VendorOrdersList from "./VendorOrdersList";
+import VendorRelayPointsList from "./VendorRelayPointsList";
+import VendorPerformanceStats from "./VendorPerformanceStats";
+import VendorSettingsNotifications from "./VendorSettingsNotifications";
+import VendorSettingsDelivery from "./VendorSettingsDelivery";
+import VendorRelayPointsMap from "./VendorRelayPointsMap";
+
+const orderData = [
+  {
+    vendor: "متجر الإلكترونيات الذكية",
+    relay_point: "متجر الأمين",
+    product: "هاتف ذكي سامسونج S23",
+    client_name: "فاطمة الزهراء",
+    client_phone: "+213 555 123 456",
+    client_address: "حي النصر، الجزائر العاصمة",
+    status: "delivered",
+    tracking_id: "DZ123456789",
+  },
+  {
+    vendor: "سوبر ماركت النور",
+    relay_point: "سوبر ماركت النور",
+    product: "مكيف هواء LG",
+    client_name: "يوسف العلي",
+    client_phone: "+213 555 654 321",
+    client_address: "شارع الجمهورية، وهران",
+    status: "shipping",
+    tracking_id: "DZ987654321",
+  },
+  {
+    vendor: "مكتبة المعرفة",
+    relay_point: "مكتبة المعرفة",
+    product: "كتاب برمجة بايثون",
+    client_name: "زينب حسني",
+    client_phone: "+213 555 789 123",
+    client_address: "حي الزهور، قسنطينة",
+    status: "pending",
+    tracking_id: "DZ456789123",
+  },
+  {
+    vendor: "صيدلية الشفاء",
+    relay_point: "صيدلية الشفاء",
+    product: "جهاز قياس الضغط",
+    client_name: "محمد الأمين",
+    client_phone: "+213 555 321 987",
+    client_address: "حي السلام، عنابة",
+    status: "cancelled",
+    tracking_id: "DZ321987654",
+  },
+];
 
 const mockData = {
   stats: [
@@ -52,40 +105,7 @@ const mockData = {
       change: "+12%",
     },
   ],
-  recentOrders: [
-    {
-      id: "ORD001234",
-      relayPoint: "متجر الأمين",
-      recipient: "فاطمة الزهراء",
-      status: "delivered",
-      amount: "2,500 د.ج",
-      date: "2024-01-15",
-    },
-    {
-      id: "ORD001235",
-      relayPoint: "سوبر ماركت النور",
-      recipient: "يوسف العلي",
-      status: "shipping",
-      amount: "1,800 د.ج",
-      date: "2024-01-14",
-    },
-    {
-      id: "ORD001236",
-      relayPoint: "مكتبة المعرفة",
-      recipient: "زينب حسني",
-      status: "pending",
-      amount: "3,200 د.ج",
-      date: "2024-01-14",
-    },
-    {
-      id: "ORD001237",
-      relayPoint: "صيدلية الشفاء",
-      recipient: "محمد الأمين",
-      status: "cancelled",
-      amount: "950 د.ج",
-      date: "2024-01-13",
-    },
-  ],
+  recentOrders: orderData,
   relayPoints: [
     {
       id: 1,
@@ -200,161 +220,17 @@ const VendorDashboard = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex gap-2 mb-8 overflow-x-auto">
-          {[
-            { id: "overview", label: "نظرة عامة", icon: ChartBarIcon },
-            { id: "orders", label: "الطلبات", icon: ShoppingBagIcon },
-            {
-              id: "relay-points",
-              label: "نقاط الترحيل",
-              icon: BuildingStorefrontIcon,
-            },
-            { id: "profile", label: "الملف الشخصي", icon: UserIcon },
-            { id: "settings", label: "الإعدادات", icon: CogIcon },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 whitespace-nowrap ${
-                activeTab === tab.id
-                  ? "bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-medium"
-                  : "bg-white text-neutral-700 hover:bg-primary-50 shadow-soft"
-              }`}
-            >
-              <tab.icon className="w-5 h-5" />
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        <VendorTabsNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
         {/* Overview Tab */}
         {activeTab === "overview" && (
           <div className="space-y-8">
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {mockData.stats.map((stat, index) => (
-                <div
-                  key={index}
-                  className="card p-6 hover:scale-105 transition-all duration-300"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className={`p-3 bg-gradient-to-br from-${stat.color}-100 to-${stat.color}-200 rounded-xl`}
-                    >
-                      <stat.icon className={`w-6 h-6 text-${stat.color}-600`} />
-                    </div>
-                    <span className="text-success-600 text-sm font-semibold">
-                      {stat.change}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-bold text-neutral-800 mb-1">
-                    {stat.value}
-                  </h3>
-                  <p className="text-neutral-600 text-sm">{stat.title}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Recent Orders */}
-            <div className="card p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-xl font-bold text-neutral-800">
-                  الطلبات الحديثة
-                </h3>
-                <button className="text-primary-600 hover:text-primary-700 font-semibold">
-                  عرض الكل
-                </button>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-neutral-200">
-                      <th className="text-right py-3 text-neutral-700 font-semibold">
-                        رقم الطلب
-                      </th>
-                      <th className="text-right py-3 text-neutral-700 font-semibold">
-                        نقطة الترحيل
-                      </th>
-                      <th className="text-right py-3 text-neutral-700 font-semibold">
-                        المستلم
-                      </th>
-                      <th className="text-right py-3 text-neutral-700 font-semibold">
-                        الحالة
-                      </th>
-                      <th className="text-right py-3 text-neutral-700 font-semibold">
-                        المبلغ
-                      </th>
-                      <th className="text-right py-3 text-neutral-700 font-semibold">
-                        التاريخ
-                      </th>
-                      <th className="text-right py-3 text-neutral-700 font-semibold">
-                        الإجراءات
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {mockData.recentOrders.map((order) => {
-                      const StatusIcon = getStatusIcon(order.status);
-                      return (
-                        <tr
-                          key={order.id}
-                          className="border-b border-neutral-100 hover:bg-neutral-50"
-                        >
-                          <td className="py-4 font-mono text-primary-600">
-                            {order.id}
-                          </td>
-                          <td className="py-4 text-neutral-800">
-                            {order.relayPoint}
-                          </td>
-                          <td className="py-4 text-neutral-800">
-                            {order.recipient}
-                          </td>
-                          <td className="py-4">
-                            <div className="flex items-center gap-2">
-                              <StatusIcon
-                                className={`w-4 h-4 text-${getStatusColor(
-                                  order.status
-                                )}-500`}
-                              />
-                              <span
-                                className={`px-3 py-1 rounded-full text-xs font-semibold bg-${getStatusColor(
-                                  order.status
-                                )}-100 text-${getStatusColor(
-                                  order.status
-                                )}-700`}
-                              >
-                                {getStatusText(order.status)}
-                              </span>
-                            </div>
-                          </td>
-                          <td className="py-4 font-semibold text-neutral-800">
-                            {order.amount}
-                          </td>
-                          <td className="py-4 text-neutral-600">
-                            {order.date}
-                          </td>
-                          <td className="py-4">
-                            <div className="flex gap-2">
-                              <button
-                                className="p-2 text-primary-600 hover:bg-primary-100 rounded-lg transition-colors"
-                                title="عرض التفاصيل"
-                              >
-                                <EyeIcon className="w-4 h-4" />
-                              </button>
-                              <button
-                                className="p-2 text-warning-600 hover:bg-warning-100 rounded-lg transition-colors"
-                                title="تعديل"
-                              >
-                                <PencilIcon className="w-4 h-4" />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
+            <VendorStatsGrid stats={mockData.stats} />
+            {/* Google Map with Relay Points */}
+            <div className="bg-white rounded-2xl shadow-soft p-4">
+              <h2 className="text-xl font-bold mb-4">نقاط الترحيل على الخريطة</h2>
+              <VendorRelayPointsMap relayPoints={mockData.relayPoints} />
             </div>
           </div>
         )}
@@ -363,9 +239,7 @@ const VendorDashboard = () => {
         {activeTab === "orders" && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-neutral-800">
-                إدارة الطلبات
-              </h3>
+              <h3 className="text-2xl font-bold text-neutral-800">إدارة الطلبات</h3>
               <div className="flex gap-4">
                 <select className="input-field w-40">
                   <option>جميع الحالات</option>
@@ -376,11 +250,7 @@ const VendorDashboard = () => {
                 </select>
                 <div className="relative">
                   <MagnifyingGlassIcon className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-                  <input
-                    type="text"
-                    placeholder="البحث في الطلبات..."
-                    className="input-field pr-10 w-64"
-                  />
+                  <input type="text" placeholder="البحث في الطلبات..." className="input-field pr-10 w-64" />
                 </div>
                 <button className="btn-primary gap-2">
                   <PlusIcon className="w-5 h-5" />
@@ -388,93 +258,12 @@ const VendorDashboard = () => {
                 </button>
               </div>
             </div>
-
-            <div className="grid gap-6">
-              {mockData.recentOrders.map((order) => {
-                const StatusIcon = getStatusIcon(order.status);
-                return (
-                  <div key={order.id} className="card p-6">
-                    <div className="flex justify-between items-start">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-3">
-                          <span className="font-mono text-lg font-bold text-primary-600">
-                            {order.id}
-                          </span>
-                          <div className="flex items-center gap-2">
-                            <StatusIcon
-                              className={`w-5 h-5 text-${getStatusColor(
-                                order.status
-                              )}-500`}
-                            />
-                            <span
-                              className={`px-3 py-1 rounded-full text-sm font-semibold bg-${getStatusColor(
-                                order.status
-                              )}-100 text-${getStatusColor(order.status)}-700`}
-                            >
-                              {getStatusText(order.status)}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                          <div>
-                            <p className="text-sm text-neutral-500 mb-1">
-                              نقطة الترحيل
-                            </p>
-                            <p className="font-semibold text-neutral-800">
-                              {order.relayPoint}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-sm text-neutral-500 mb-1">
-                              المستلم
-                            </p>
-                            <p className="font-semibold text-neutral-800">
-                              {order.recipient}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-sm text-neutral-500 mb-1">
-                              المبلغ
-                            </p>
-                            <p className="font-semibold text-success-600">
-                              {order.amount}
-                            </p>
-                          </div>
-                          <div>
-                            <p className="text-sm text-neutral-500 mb-1">
-                              التاريخ
-                            </p>
-                            <p className="font-semibold text-neutral-800">
-                              {order.date}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          className="p-2 text-primary-600 hover:bg-primary-100 rounded-lg transition-colors"
-                          title="عرض التفاصيل"
-                        >
-                          <EyeIcon className="w-4 h-4" />
-                        </button>
-                        <button
-                          className="p-2 text-warning-600 hover:bg-warning-100 rounded-lg transition-colors"
-                          title="تعديل"
-                        >
-                          <PencilIcon className="w-4 h-4" />
-                        </button>
-                        <button
-                          className="p-2 text-error-600 hover:bg-error-100 rounded-lg transition-colors"
-                          title="إلغاء"
-                        >
-                          <TrashIcon className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <VendorOrdersList
+              recentOrders={mockData.recentOrders}
+              getStatusIcon={getStatusIcon}
+              getStatusColor={getStatusColor}
+              getStatusText={getStatusText}
+            />
           </div>
         )}
 
@@ -482,151 +271,24 @@ const VendorDashboard = () => {
         {activeTab === "relay-points" && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-neutral-800">
-                نقاط الترحيل المتاحة
-              </h3>
+              <h3 className="text-2xl font-bold text-neutral-800">نقاط الترحيل المتاحة</h3>
               <div className="relative">
                 <MagnifyingGlassIcon className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-                <input
-                  type="text"
-                  placeholder="البحث في نقاط الترحيل..."
-                  className="input-field pr-10 w-64"
-                />
+                <input type="text" placeholder="البحث في نقاط الترحيل..." className="input-field pr-10 w-64" />
               </div>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {mockData.relayPoints.map((relay) => (
-                <div key={relay.id} className="card p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h4 className="text-lg font-bold text-neutral-800 mb-1">
-                        {relay.name}
-                      </h4>
-                      <div className="flex items-center gap-2 text-neutral-600 mb-2">
-                        <MapPinIcon className="w-4 h-4" />
-                        <span>{relay.location}</span>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-sm text-neutral-600">
-                          المسافة: {relay.distance}
-                        </span>
-                        <div className="flex items-center gap-1">
-                          <span className="text-sm font-semibold text-warning-600">
-                            ⭐ {relay.rating}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <span className="text-2xl font-bold text-primary-600">
-                        {relay.orders}
-                      </span>
-                      <p className="text-sm text-neutral-500">طلب</p>
-                    </div>
-                  </div>
-                  <button className="btn-primary w-full">
-                    اختيار نقطة الترحيل
-                  </button>
-                </div>
-              ))}
-            </div>
+            <VendorRelayPointsList relayPoints={mockData.relayPoints} />
           </div>
         )}
 
         {/* Profile Tab */}
         {activeTab === "profile" && (
           <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-neutral-800">
-              الملف الشخصي
-            </h3>
-
+            <h3 className="text-2xl font-bold text-neutral-800">الملف الشخصي</h3>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="card p-6">
-                <h4 className="text-lg font-bold text-neutral-800 mb-4">
-                  معلومات البائع
-                </h4>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                      اسم الشركة / المتجر
-                    </label>
-                    <input
-                      type="text"
-                      value="متجر الإلكترونيات الذكية"
-                      className="input-field"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                      الاسم الكامل
-                    </label>
-                    <input
-                      type="text"
-                      value="أحمد بن محمد"
-                      className="input-field"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                      البريد الإلكتروني
-                    </label>
-                    <input
-                      type="email"
-                      value="ahmed@smartelectronics.dz"
-                      className="input-field"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                      رقم الهاتف
-                    </label>
-                    <input
-                      type="tel"
-                      value="+213 555 987 654"
-                      className="input-field"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                      المنطقة
-                    </label>
-                    <input
-                      type="text"
-                      value="الجزائر العاصمة"
-                      className="input-field"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="card p-6">
-                <h4 className="text-lg font-bold text-neutral-800 mb-4">
-                  إحصائيات الأداء
-                </h4>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center p-3 bg-success-50 rounded-lg">
-                    <span className="text-neutral-700">
-                      معدل التسليم الناجح
-                    </span>
-                    <span className="font-bold text-success-600">94.2%</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-primary-50 rounded-lg">
-                    <span className="text-neutral-700">متوسط وقت التوصيل</span>
-                    <span className="font-bold text-primary-600">2.8 أيام</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-secondary-50 rounded-lg">
-                    <span className="text-neutral-700">تقييم العملاء</span>
-                    <span className="font-bold text-secondary-600">4.6/5</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-warning-50 rounded-lg">
-                    <span className="text-neutral-700">إجمالي الطلبات</span>
-                    <span className="font-bold text-warning-600">284</span>
-                  </div>
-                </div>
-              </div>
+              <VendorProfileForm />
+              <VendorPerformanceStats />
             </div>
-
             <div className="flex justify-end gap-4">
               <button className="btn-secondary">إلغاء</button>
               <button className="btn-primary">حفظ التغييرات</button>
@@ -638,84 +300,10 @@ const VendorDashboard = () => {
         {activeTab === "settings" && (
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-neutral-800">الإعدادات</h3>
-
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="card p-6">
-                <h4 className="text-lg font-bold text-neutral-800 mb-4">
-                  إعدادات الإشعارات
-                </h4>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-neutral-700">
-                      إشعارات حالة الطلبات
-                    </span>
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 text-primary-600"
-                      defaultChecked
-                    />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-neutral-700">تأكيدات التسليم</span>
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 text-primary-600"
-                      defaultChecked
-                    />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-neutral-700">
-                      إشعارات البريد الإلكتروني
-                    </span>
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 text-primary-600"
-                    />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-neutral-700">إشعارات SMS</span>
-                    <input
-                      type="checkbox"
-                      className="w-4 h-4 text-primary-600"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="card p-6">
-                <h4 className="text-lg font-bold text-neutral-800 mb-4">
-                  إعدادات التوصيل
-                </h4>
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                      نطاق التوصيل المفضل (كم)
-                    </label>
-                    <input type="number" value="10" className="input-field" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                      الحد الأقصى للطلبات اليومية
-                    </label>
-                    <input type="number" value="20" className="input-field" />
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="checkbox"
-                      id="autoSelect"
-                      className="w-4 h-4 text-primary-600"
-                    />
-                    <label
-                      htmlFor="autoSelect"
-                      className="text-sm text-neutral-700"
-                    >
-                      اختيار نقطة الترحيل تلقائياً
-                    </label>
-                  </div>
-                </div>
-              </div>
+              <VendorSettingsNotifications />
+              <VendorSettingsDelivery />
             </div>
-
             <div className="flex justify-end gap-4">
               <button className="btn-secondary">إلغاء</button>
               <button className="btn-primary">حفظ التغييرات</button>
