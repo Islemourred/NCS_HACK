@@ -95,7 +95,7 @@ const LandingPage = () => {
 
   return (
     <div className="flex flex-col w-full">
-      {/* Hero Section */}
+      /* Hero Section */
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-20 px-4">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
@@ -133,10 +133,13 @@ const LandingPage = () => {
             </div>
           </div>
 
-          <div className="flex-1 relative animate-slide-up">
-            <div className="relative">
-              <div className="w-96 h-96 bg-gradient-to-br from-primary-200 to-secondary-200 rounded-3xl rotate-6 absolute -top-4 -left-4 opacity-20"></div>
-              <div className="w-96 h-96 bg-white rounded-3xl shadow-strong p-8 relative z-10 flex items-center justify-center">
+          {/* Only the card and its background are sized together */}
+          <div className="flex-1 flex items-center justify-center animate-slide-up">
+            <div className="relative w-[384px] h-[384px]">
+              {" "}
+              {/* w-96 h-96 */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-200 to-secondary-200 rounded-3xl rotate-6 opacity-20"></div>
+              <div className="w-full h-full bg-white rounded-3xl shadow-strong p-8 relative z-10 flex items-center justify-center">
                 <div className="text-center">
                   <TruckIcon className="w-32 h-32 text-primary-500 mx-auto mb-4" />
                   <h3 className="text-2xl font-bold text-neutral-800 mb-2">
@@ -151,7 +154,6 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
       {/* Features Section */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -183,7 +185,6 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
       {/* How It Works */}
       <section
         id="how"
@@ -221,7 +222,6 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
       {/* Track Parcel Section */}
       <section id="track" className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
@@ -352,7 +352,6 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="bg-neutral-900 text-white py-12 px-4">
         <div className="max-w-7xl mx-auto text-center">
