@@ -1,9 +1,11 @@
+// App.jsx
 import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
+  useLocation,
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
@@ -13,6 +15,7 @@ import VendorDashboard from "./pages/vendor/VendorDashboard";
 import RelayDashboard from "./pages/relay/RelayDashboard";
 import AuthLogin from "./pages/auth/AuthLogin";
 import AuthRegister from "./pages/auth/AuthRegister";
+import AdminRegister from "./pages/admin/AdminRegister";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
 function PrivateRoute({ children, role }) {
@@ -25,6 +28,7 @@ function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       {/* Admin */}
       <Route path="/admin" element={<AdminLogin />} />
+      <Route path="/admin/register" element={<AdminRegister />} />
       <Route
         path="/admin/dashboard"
         element={
@@ -62,14 +66,31 @@ function AppRoutes() {
   );
 }
 
+function AppLayout() {
+  const location = useLocation();
+  const hideNavbarRoutes = [
+    "/admin",
+    "/admin/register",
+    "/vendor/login",
+    "/relay/login",
+    "/vendor/register",
+    "/relay/register",
+  ];
+  const hideNavbar = hideNavbarRoutes.includes(location.pathname);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50 to-secondary-50 text-neutral-900">
+      {!hideNavbar && <Navbar />}
+      <AppRoutes />
+    </div>
+  );
+}
+
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50 to-secondary-50 text-neutral-900">
-          <Navbar />
-          <AppRoutes />
-        </div>
+        <AppLayout />
       </Router>
     </AuthProvider>
   );

@@ -57,7 +57,7 @@ const AuthLogin = () => {
               <span className="text-2xl font-bold gradient-text">
                 ColisPoint
               </span>
-              <span className="text-xs font-medium text-neutral-500 -mt-1">
+              <span className="text-xs font-medium text-primary-700 -mt-1">
                 DZ
               </span>
             </div>

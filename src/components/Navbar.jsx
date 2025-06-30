@@ -25,14 +25,14 @@ const Navbar = () => {
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="p-2 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl shadow-soft group-hover:shadow-medium transition-all duration-200">
+            <div className="p-2 bg-gradient-to-br from-primary-600 to-primary-400 rounded-xl shadow-soft group-hover:shadow-medium transition-all duration-200">
               <TruckIcon className="w-7 h-7 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-bold gradient-text">
+              <span className="text-2xl font-bold text-primary-500">
                 ColisPoint
               </span>
-              <span className="text-xs font-medium text-neutral-500 -mt-1">
+              <span className="text-xs font-medium text-primary-700 -mt-1">
                 DZ
               </span>
             </div>
