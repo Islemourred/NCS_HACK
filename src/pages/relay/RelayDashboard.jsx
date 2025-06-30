@@ -96,7 +96,6 @@ const WILAYA_LIST = [
   { code: "31", name: "وهران" },
   { code: "09", name: "البليدة" },
   { code: "25", name: "قسنطينة" },
-  // ... add more as needed
 ];
 
 function RelayPointsCRUD() {
@@ -108,6 +107,8 @@ function RelayPointsCRUD() {
       opening_hours: "09:00 - 19:00",
       contact_phone: "+213 555 123 456",
       status: "APPROVED",
+      latitude: "23.25",
+      longitude: "25",
     },
     {
       id: 2,
@@ -116,6 +117,8 @@ function RelayPointsCRUD() {
       opening_hours: "08:00 - 18:00",
       contact_phone: "+213 555 654 321",
       status: "PENDING",
+      latitude: "50",
+      longitude: "30",
     },
   ]);
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -126,6 +129,8 @@ function RelayPointsCRUD() {
     opening_hours: "",
     contact_phone: "",
     status: "PENDING",
+    latitude: "",
+    longitude: "",
   });
   const [deleteId, setDeleteId] = React.useState(null);
 
@@ -137,6 +142,8 @@ function RelayPointsCRUD() {
       opening_hours: "",
       contact_phone: "",
       status: "PENDING",
+      latitude: "",
+      longitude: "",
     });
     setModalOpen(true);
   };
@@ -145,6 +152,8 @@ function RelayPointsCRUD() {
     setForm({
       ...relay,
       wilaya: relay.wilaya || WILAYA_LIST[0],
+      latitude: relay.latitude || "",
+      longitude: relay.longitude || "",
     });
     setModalOpen(true);
   };
@@ -190,6 +199,8 @@ function RelayPointsCRUD() {
               <th className="py-3 text-right">ساعات العمل</th>
               <th className="py-3 text-right">الهاتف</th>
               <th className="py-3 text-right">الحالة</th>
+              <th className="py-3 text-right">خط العرض</th>
+              <th className="py-3 text-right">خط الطول</th>
               <th className="py-3 text-right">إجراءات</th>
             </tr>
           </thead>
@@ -204,7 +215,9 @@ function RelayPointsCRUD() {
                   {relay.wilaya.name} ({relay.wilaya.code})
                 </td>
                 <td className="py-3">{relay.opening_hours}</td>
-                <td className="py-3">{relay.contact_phone}</td>
+                <td className="py-3">
+                  <span dir="ltr">{relay.contact_phone}</span>
+                </td>
                 <td className="py-3">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold bg-primary-100 text-primary-700`}
@@ -214,6 +227,12 @@ function RelayPointsCRUD() {
                         ?.label
                     }
                   </span>
+                </td>
+                <td className="py-3">
+                  <span dir="ltr">{relay.latitude}</span>
+                </td>
+                <td className="py-3">
+                  <span dir="ltr">{relay.longitude}</span>
                 </td>
                 <td className="py-3">
                   <div className="flex gap-2">
@@ -235,7 +254,7 @@ function RelayPointsCRUD() {
             ))}
             {relayPoints.length === 0 && (
               <tr>
-                <td colSpan={7} className="py-6 text-center text-neutral-400">
+                <td colSpan={8} className="py-6 text-center text-neutral-400">
                   لا توجد نقاط ترحيل بعد.
                 </td>
               </tr>
@@ -293,10 +312,11 @@ function RelayPointsCRUD() {
               <label className="block mb-1 font-semibold">رقم الهاتف</label>
               <input
                 name="contact_phone"
-                className="input-field w-full"
+                className="input-field w-full font-mono"
                 value={form.contact_phone}
                 onChange={handleChange}
                 required
+                dir="ltr"
               />
             </div>
             <div>
@@ -315,7 +335,38 @@ function RelayPointsCRUD() {
                 ))}
               </select>
             </div>
-
+            <div>
+              <label className="block mb-1 font-semibold">
+                خط العرض (Latitude)
+              </label>
+              <input
+                name="latitude"
+                type="number"
+                step="0.000001"
+                min="-90"
+                max="90"
+                className="input-field w-full"
+                value={form.latitude}
+                onChange={handleChange}
+                placeholder="مثال: 36.752887"
+              />
+            </div>
+            <div>
+              <label className="block mb-1 font-semibold">
+                خط الطول (Longitude)
+              </label>
+              <input
+                name="longitude"
+                type="number"
+                step="0.000001"
+                min="-180"
+                max="180"
+                className="input-field w-full"
+                value={form.longitude}
+                onChange={handleChange}
+                placeholder="مثال: 3.042048"
+              />
+            </div>
             <div className="flex justify-end gap-2 mt-4">
               <button
                 type="button"
