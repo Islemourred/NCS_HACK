@@ -19,55 +19,50 @@ import {
 const features = [
   {
     icon: TruckIcon,
-    title: "Fast Delivery Network",
-    description:
-      "Decentralized pickup points across Algeria for faster, more reliable deliveries.",
+    title: "شبكة توصيل سريعة",
+    description: "نقاط استلام لامركزية عبر الجزائر لتوصيل أسرع وأكثر موثوقية.",
   },
   {
     icon: BuildingStorefrontIcon,
-    title: "Local Partnerships",
-    description:
-      "Empowering local businesses as relay points, creating economic opportunities.",
+    title: "شراكات محلية",
+    description: "تمكين الشركات المحلية كنقاط ترحيل، وخلق فرص اقتصادية.",
   },
   {
     icon: ShieldCheckIcon,
-    title: "Secure & Tracked",
-    description:
-      "Complete tracking from pickup to delivery with secure PIN/QR verification.",
+    title: "آمن ومتتبع",
+    description: "تتبع كامل من الاستلام إلى التسليم مع التحقق الآمن بـ PIN/QR.",
   },
   {
     icon: CurrencyDollarIcon,
-    title: "Cost Effective",
-    description:
-      "Reduce failed delivery costs and optimize logistics for all parties.",
+    title: "فعال من حيث التكلفة",
+    description: "تقليل تكاليف فشل التسليم وتحسين اللوجستيات لجميع الأطراف.",
   },
 ];
 
 const steps = [
   {
     number: "01",
-    title: "Create Order",
-    description:
-      "Sellers create delivery orders and select the nearest relay point",
+    title: "إنشاء الطلب",
+    description: "البائعون ينشئون طلبات التوصيل ويختارون أقرب نقطة ترحيل",
     icon: IdentificationIcon,
   },
   {
     number: "02",
-    title: "Store Package",
-    description: "Local relay points accept and safely store parcels",
+    title: "تخزين الطرد",
+    description: "نقاط الترحيل المحلية تقبل وتخزن الطرود بأمان",
     icon: BuildingStorefrontIcon,
   },
   {
     number: "03",
-    title: "Notify Customer",
-    description: "Customers receive PIN/QR code and pickup location details",
+    title: "إشعار العميل",
+    description: "العملاء يتلقون رمز PIN/QR وتفاصيل موقع الاستلام",
     icon: PhoneIcon,
   },
   {
     number: "04",
-    title: "Easy Pickup",
+    title: "استلام سهل",
     description:
-      "Convenient pickup from nearby relay point - no missed deliveries!",
+      "استلام مناسب من نقطة الترحيل القريبة - لا مزيد من التسليمات الفائتة!",
     icon: CheckCircleIcon,
   },
 ];
@@ -94,15 +89,15 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="flex flex-col w-full">
-      /* Hero Section */
+    <div className="flex flex-col w-full" dir="rtl">
+      {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-20 px-4">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-end">
-          <div className="flex-1 text-center lg:text-left animate-fade-in">
+          <div className="flex-1 text-center lg:text-right animate-fade-in">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <SparklesIcon className="w-4 h-4" />
-              Revolutionizing Algeria's Delivery Network
+              ثورة في شبكة التوصيل الجزائرية
             </div>
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
               <span className="gradient-text">ColisPoint</span>
@@ -110,44 +105,41 @@ const LandingPage = () => {
               <span className="text-neutral-800">DZ</span>
             </h1>
             <p className="text-xl text-neutral-600 mb-8 max-w-2xl leading-relaxed">
-              Decentralized logistics platform connecting sellers, relay points,
-              and customers.
+              منصة لوجستية لامركزية تربط البائعين ونقاط الترحيل والعملاء.
               <span className="font-semibold text-primary-600">
                 {" "}
-                Zero failed deliveries.
+                صفر تسليمات فاشلة.
               </span>
               <span className="font-semibold text-secondary-600">
                 {" "}
-                Maximum convenience.
+                أقصى راحة.
               </span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <a href="#track" className="btn-primary gap-2 text-lg px-8 py-4">
                 <TruckIcon className="w-6 h-6" />
-                Track Your Package
+                تتبع طردك
               </a>
               <a href="#how" className="btn-secondary gap-2 text-lg px-8 py-4">
                 <GlobeAltIcon className="w-6 h-6" />
-                How It Works
+                كيف يعمل
               </a>
             </div>
           </div>
 
           {/* Only the card and its background are sized together */}
-          <div className="flex-1 flex items-start justify-end animate-slide-up">
+          <div className="flex-1 flex items-end justify-end animate-slide-up">
             <div className="relative w-[384px] h-[384px]">
               {" "}
               {/* w-96 h-96 */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-200 to-secondary-200 rounded-3xl rotate-6 opacity-20"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-200 to-secondary-200 rounded-3xl -rotate-6 opacity-20"></div>
               <div className="w-full h-full bg-white rounded-3xl shadow-strong p-8 relative z-10 flex items-center justify-center">
                 <div className="text-center">
                   <TruckIcon className="w-32 h-32 text-primary-500 mx-auto mb-4" />
                   <h3 className="text-2xl font-bold text-neutral-800 mb-2">
-                    Smart Logistics
+                    لوجستيات ذكية
                   </h3>
-                  <p className="text-neutral-600">
-                    Connected. Efficient. Reliable.
-                  </p>
+                  <p className="text-neutral-600">متصل. فعال. موثوق.</p>
                 </div>
               </div>
             </div>
@@ -159,11 +151,11 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-neutral-800 mb-4">
-              Why Choose ColisPoint DZ?
+              لماذا تختار ColisPoint DZ؟
             </h2>
             <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-              We're transforming the delivery experience across Algeria with
-              innovative technology and local partnerships.
+              نحن نحول تجربة التوصيل عبر الجزائر بالتكنولوجيا المبتكرة والشراكات
+              المحلية.
             </p>
           </div>
 
@@ -193,11 +185,11 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-neutral-800 mb-4">
-              How It Works
+              كيف يعمل
             </h2>
             <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
-              Simple, efficient, and reliable - our four-step process ensures
-              your packages reach their destination.
+              بسيط وفعال وموثوق - عمليتنا من أربع خطوات تضمن وصول طرودك إلى
+              وجهتها.
             </p>
           </div>
 
@@ -227,11 +219,10 @@ const LandingPage = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-neutral-800 mb-4">
-              Track Your Package
+              تتبع طردك
             </h2>
             <p className="text-xl text-neutral-600">
-              Enter your tracking ID to get real-time updates on your delivery
-              status.
+              أدخل رقم التتبع الخاص بك للحصول على تحديثات فورية لحالة التسليم.
             </p>
           </div>
 
@@ -239,11 +230,11 @@ const LandingPage = () => {
             <form onSubmit={handleTrack} className="space-y-6">
               <div>
                 <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                  Tracking ID
+                  رقم التتبع
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter your Parcel ID (e.g. DZ123456789)"
+                  placeholder="أدخل رقم الطرد الخاص بك (مثال: DZ123456789)"
                   value={parcelId}
                   onChange={(e) => setParcelId(e.target.value)}
                   className="input-field"
@@ -258,19 +249,19 @@ const LandingPage = () => {
                 {loading ? (
                   <div className="flex items-center gap-2">
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Searching...
+                    جاري البحث...
                   </div>
                 ) : (
                   <>
                     <TruckIcon className="w-6 h-6" />
-                    Track Package
+                    تتبع الطرد
                   </>
                 )}
               </button>
             </form>
 
             {error && (
-              <div className="mt-6 p-4 bg-error-50 border-l-4 border-error-500 rounded-r-xl">
+              <div className="mt-6 p-4 bg-error-50 border-r-4 border-error-500 rounded-l-xl">
                 <p className="text-error-700 font-medium">{error}</p>
               </div>
             )}
@@ -280,7 +271,7 @@ const LandingPage = () => {
                 <div className="flex items-center gap-3 mb-6">
                   <CheckCircleIcon className="w-8 h-8 text-success-600" />
                   <h3 className="text-2xl font-bold text-neutral-800">
-                    Package Found!
+                    تم العثور على الطرد!
                   </h3>
                 </div>
 
@@ -289,7 +280,7 @@ const LandingPage = () => {
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 bg-success-500 rounded-full"></div>
                       <span className="font-semibold text-neutral-700">
-                        Status:
+                        الحالة:
                       </span>
                       <span className="px-3 py-1 bg-success-100 text-success-700 rounded-full text-sm font-medium">
                         {result.status}
@@ -299,33 +290,33 @@ const LandingPage = () => {
                       <MapPinIcon className="w-5 h-5 text-primary-600 mt-0.5" />
                       <div>
                         <span className="font-semibold text-neutral-700">
-                          Pickup Point:
+                          نقطة الاستلام:
                         </span>
                         <p className="text-neutral-600">
                           {result.relayId
                             ? "Boutique El Amine"
-                            : "Not assigned yet"}
+                            : "لم يتم التعيين بعد"}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
                       <UserGroupIcon className="w-5 h-5 text-primary-600" />
                       <span className="font-semibold text-neutral-700">
-                        Customer:
+                        العميل:
                       </span>
                       <span className="text-neutral-600">{result.client}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <PhoneIcon className="w-5 h-5 text-primary-600" />
                       <span className="font-semibold text-neutral-700">
-                        Phone:
+                        الهاتف:
                       </span>
                       <span className="text-neutral-600">{result.phone}</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <GlobeAltIcon className="w-5 h-5 text-primary-600" />
                       <span className="font-semibold text-neutral-700">
-                        Region:
+                        المنطقة:
                       </span>
                       <span className="text-neutral-600">{result.region}</span>
                     </div>
@@ -333,7 +324,7 @@ const LandingPage = () => {
 
                   <div className="text-center">
                     <p className="font-semibold text-neutral-700 mb-4">
-                      Show this at pickup:
+                      أظهر هذا عند الاستلام:
                     </p>
                     <div className="inline-block p-4 bg-white rounded-2xl shadow-medium">
                       <QRCodeSVG
@@ -352,6 +343,7 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+
       {/* Footer */}
       <footer className="bg-neutral-900 text-white py-12 px-4">
         <div className="max-w-7xl mx-auto text-center">
@@ -362,12 +354,10 @@ const LandingPage = () => {
             <span className="text-2xl font-bold">ColisPoint DZ</span>
           </div>
           <p className="text-neutral-400 mb-4">
-            Transforming delivery logistics across Algeria, one package at a
-            time.
+            تحويل لوجستيات التوصيل عبر الجزائر، طرد واحد في كل مرة.
           </p>
           <p className="text-neutral-500 text-sm">
-            &copy; {new Date().getFullYear()} ColisPoint DZ. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} ColisPoint DZ. جميع الحقوق محفوظة.
           </p>
         </div>
       </footer>
