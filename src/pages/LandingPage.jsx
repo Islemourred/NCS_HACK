@@ -98,7 +98,7 @@ const LandingPage = () => {
       /* Hero Section */
       <section className="relative overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-20 px-4">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 items-end">
           <div className="flex-1 text-center lg:text-left animate-fade-in">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <SparklesIcon className="w-4 h-4" />
@@ -134,7 +134,7 @@ const LandingPage = () => {
           </div>
 
           {/* Only the card and its background are sized together */}
-          <div className="flex-1 flex items-center justify-center animate-slide-up">
+          <div className="flex-1 flex items-start justify-end animate-slide-up">
             <div className="relative w-[384px] h-[384px]">
               {" "}
               {/* w-96 h-96 */}
