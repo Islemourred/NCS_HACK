@@ -20,6 +20,12 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 
 function PrivateRoute({ children, role }) {
   const { user } = useAuth();
+
+  if (user && user.role === role) {
+    return children;
+  } else {
+    return <Navigate to="/" replace />;
+  }
 }
 
 function AppRoutes() {

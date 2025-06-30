@@ -159,7 +159,7 @@ const RelayDashboard = () => {
         <div className="flex gap-2 mb-8 overflow-x-auto">
           {[
             { id: "overview", label: "نظرة عامة", icon: TruckIcon },
-            { id: "parcels", label: "إدارة الطرود", icon: PackageIcon },
+            { id: "parcels", label: "إدارة الطرود", icon: TruckIcon },
             { id: "profile", label: "الملف الشخصي", icon: UserIcon },
             { id: "settings", label: "الإعدادات", icon: CogIcon },
           ].map((tab) => (
