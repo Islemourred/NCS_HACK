@@ -100,7 +100,7 @@ const LandingPage = () => {
               ثورة في شبكة التوصيل الجزائرية
             </div>
             <h1 className="text-5xl lg:text-7xl font-bold mb-6">
-              <span className="gradient-text">ColisPoint</span>
+              <span className="gradient-text">نقطة</span>
               <br />
               <span className="text-neutral-800">DZ</span>
             </h1>

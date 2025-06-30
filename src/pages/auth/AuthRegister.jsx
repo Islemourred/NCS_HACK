@@ -17,8 +17,8 @@ import {
 } from "@heroicons/react/24/outline";
 
 const roles = [
-  { value: "vendor", label: "Seller", icon: BuildingStorefrontIcon },
-  { value: "relay", label: "Relay Point", icon: TruckIcon },
+  { value: "vendor", label: "بائع", icon: BuildingStorefrontIcon },
+  { value: "relay", label: "نقطة ترحيل", icon: TruckIcon },
 ];
 
 function getInitialRole(pathname) {
@@ -43,20 +43,27 @@ const AuthRegister = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  const handleChange = (e) =>
+    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
-      setTimeout(() => navigate(role === "vendor" ? "/vendor/login" : "/relay/login"), 1200);
+      setTimeout(
+        () => navigate(role === "vendor" ? "/vendor/login" : "/relay/login"),
+        1200
+      );
     }, 1000);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-secondary-50 p-4">
+    <div
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-secondary-50 p-4"
+      dir="rtl"
+    >
       <div className="w-full max-w-6xl bg-white rounded-3xl shadow-strong flex overflow-hidden border border-neutral-100">
         {/* Left: Form */}
         <div className="w-full lg:w-1/2 p-12 flex flex-col justify-center">
@@ -66,20 +73,18 @@ const AuthRegister = () => {
               <TruckIcon className="w-7 h-7 text-white" />
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-bold gradient-text">
-                ColisPoint
-              </span>
-              <span className="text-xs font-medium text-primary-700 -mt-1">
+              <span className="text-2xl font-bold gradient-text">نقطة</span>
+              <span className="text-xs font-medium text-neutral-500 -mt-1">
                 DZ
               </span>
             </div>
           </div>
 
           <h2 className="text-4xl font-bold text-neutral-800 mb-2">
-            Create Your Account
+            إنشاء حسابك
           </h2>
           <p className="text-neutral-600 mb-8 text-lg">
-            Sign up as a Seller or Relay Point to join the decentralized delivery network.
+            سجل كبائع أو نقطة ترحيل للانضمام إلى شبكة التوصيل اللامركزية.
           </p>
 
           {/* Role Selection */}
@@ -107,17 +112,17 @@ const AuthRegister = () => {
             {/* Name Input */}
             <div className="relative">
               <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                Name
+                الاسم
               </label>
               <div className="relative">
-                <UserIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                <UserIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                 <input
                   name="name"
                   type="text"
-                  placeholder="Enter your name"
+                  placeholder="أدخل اسمك"
                   value={form.name}
                   onChange={handleChange}
-                  className="input-field pl-12"
+                  className="input-field pr-12"
                   required
                 />
               </div>
@@ -125,17 +130,17 @@ const AuthRegister = () => {
             {/* Email Input */}
             <div className="relative">
               <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                Email Address
+                عنوان البريد الإلكتروني
               </label>
               <div className="relative">
-                <EnvelopeIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                <EnvelopeIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                 <input
                   name="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="أدخل بريدك الإلكتروني"
                   value={form.email}
                   onChange={handleChange}
-                  className="input-field pl-12"
+                  className="input-field pr-12"
                   required
                 />
               </div>
@@ -143,23 +148,23 @@ const AuthRegister = () => {
             {/* Password Input */}
             <div className="relative">
               <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                Password
+                كلمة المرور
               </label>
               <div className="relative">
-                <KeyIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                <KeyIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                 <input
                   name="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
+                  placeholder="أدخل كلمة المرور"
                   value={form.password}
                   onChange={handleChange}
-                  className="input-field pl-12 pr-12"
+                  className="input-field pr-12 pl-12"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-primary-500 transition-colors"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-primary-500 transition-colors"
                 >
                   {showPassword ? (
                     <EyeSlashIcon className="w-5 h-5" />
@@ -172,17 +177,17 @@ const AuthRegister = () => {
             {/* Phone Input */}
             <div className="relative">
               <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                Phone
+                رقم الهاتف
               </label>
               <div className="relative">
-                <DevicePhoneMobileIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                <DevicePhoneMobileIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                 <input
                   name="phone"
                   type="text"
-                  placeholder="Enter your phone number"
+                  placeholder="أدخل رقم هاتفك"
                   value={form.phone}
                   onChange={handleChange}
-                  className="input-field pl-12"
+                  className="input-field pr-12"
                   required
                 />
               </div>
@@ -191,17 +196,17 @@ const AuthRegister = () => {
             {role === "vendor" && (
               <div className="relative">
                 <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                  Region (Wilaya)
+                  المنطقة (الولاية)
                 </label>
                 <div className="relative">
-                  <MapPinIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                  <MapPinIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                   <input
                     name="region"
                     type="text"
-                    placeholder="Enter your region (Wilaya)"
+                    placeholder="أدخل منطقتك (الولاية)"
                     value={form.region}
                     onChange={handleChange}
-                    className="input-field pl-12"
+                    className="input-field pr-12"
                     required
                   />
                 </div>
@@ -211,34 +216,34 @@ const AuthRegister = () => {
               <>
                 <div className="relative">
                   <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                    Address
+                    العنوان
                   </label>
                   <div className="relative">
-                    <MapPinIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                    <MapPinIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                     <input
                       name="address"
                       type="text"
-                      placeholder="Enter your address"
+                      placeholder="أدخل عنوانك"
                       value={form.address}
                       onChange={handleChange}
-                      className="input-field pl-12"
+                      className="input-field pr-12"
                       required
                     />
                   </div>
                 </div>
                 <div className="relative">
                   <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                    Opening Hours
+                    ساعات العمل
                   </label>
                   <div className="relative">
-                    <ClockIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                    <ClockIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                     <input
                       name="hours"
                       type="text"
-                      placeholder="Opening Hours (e.g. 09:00-19:00)"
+                      placeholder="ساعات العمل (مثال: 09:00-19:00)"
                       value={form.hours}
                       onChange={handleChange}
-                      className="input-field pl-12"
+                      className="input-field pr-12"
                       required
                     />
                   </div>
@@ -254,19 +259,20 @@ const AuthRegister = () => {
               {loading ? (
                 <div className="flex items-center gap-2">
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Registering...
+                  جاري التسجيل...
                 </div>
               ) : (
                 <>
                   <ArrowRightOnRectangleIcon className="w-6 h-6" />
-                  Register
+                  تسجيل
                 </>
               )}
             </button>
           </form>
           {success && (
-            <div className="flex flex-col items-center gap-2 text-green-600 text-center mt-6">
-              <CheckCircleIcon className="w-7 h-7" />Registration successful! Redirecting...
+            <div className="flex flex-col items-center gap-2 text-success-600 text-center mt-6">
+              <CheckCircleIcon className="w-7 h-7" />
+              تم التسجيل بنجاح! جاري التوجيه...
             </div>
           )}
         </div>
@@ -280,18 +286,30 @@ const AuthRegister = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-primary-600/20 to-secondary-600/20 flex items-center justify-center">
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 max-w-sm mx-8 shadow-strong">
               <h3 className="text-2xl font-bold text-neutral-800 mb-4">
-                Smart Logistics Platform
+                منصة لوجستية ذكية
               </h3>
               <p className="text-neutral-600 leading-relaxed">
-                Join ColisPoint DZ's revolutionary delivery network. Connect
-                with customers, reduce failed deliveries, and grow your business
-                with our decentralized logistics solution.
+                انضم إلى شبكة التوصيل الثورية في ColisPoint DZ. تواصل مع
+                العملاء، قلل من التسليمات الفاشلة، وطور عملك بحلولنا اللوجستية
+                اللامركزية.
               </p>
               <div className="flex items-center gap-4 mt-6">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-success-500 rounded-full"></div>
                   <span className="text-sm font-medium text-neutral-700">
-                    Secure
+                    آمن
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-primary-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-neutral-700">
+                    فعال
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-secondary-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-neutral-700">
+                    موثوق
                   </span>
                 </div>
               </div>
@@ -303,4 +321,4 @@ const AuthRegister = () => {
   );
 };
 
-export default AuthRegister; 
+export default AuthRegister;
