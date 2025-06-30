@@ -2,29 +2,20 @@ import React, { useState } from "react";
 import {
   ShoppingBagIcon,
   TruckIcon,
-  ChartBarIcon,
   CurrencyDollarIcon,
-  MapPinIcon,
   ClockIcon,
   CheckCircleIcon,
   XCircleIcon,
-  ExclamationTriangleIcon,
   PlusIcon,
   MagnifyingGlassIcon,
-  EyeIcon,
-  PencilIcon,
-  TrashIcon,
   BellIcon,
-  CogIcon,
-  UserIcon,
-  BuildingStorefrontIcon,
-  DocumentTextIcon,
 } from "@heroicons/react/24/outline";
 import VendorTabsNav from "./VendorTabsNav";
 import VendorStatsGrid from "./VendorStatsGrid";
 import VendorProfileForm from "./VendorProfileForm";
 // import VendorRecentOrdersTable from "./VendorRecentOrdersTable";
 import VendorOrdersList from "./VendorOrdersList";
+import VendorRelayPointsList from "./VendorRelayPointsList";
 import VendorPerformanceStats from "./VendorPerformanceStats";
 import VendorSettingsNotifications from "./VendorSettingsNotifications";
 import VendorSettingsDelivery from "./VendorSettingsDelivery";
@@ -290,10 +281,14 @@ const VendorDashboard = () => {
                 />
               </div>
             </div>
+            <VendorRelayPointsList relayPoints={mockData.relayPoints} />
           </div>
         )}
 
-        {/* Profile Tab */}
+        {/*
+
+Islem L3ziz, [30/06/2025 19:19]
+Profile Tab */}
         {activeTab === "profile" && (
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-neutral-800">
