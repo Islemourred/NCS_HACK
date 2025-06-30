@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { ArrowRightOnRectangleIcon, EnvelopeIcon, KeyIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowRightOnRectangleIcon,
+  EnvelopeIcon,
+  KeyIcon,
+  TruckIcon,
+  BuildingStorefrontIcon,
+  EyeIcon,
+  EyeSlashIcon,
+} from "@heroicons/react/24/outline";
 
 const roles = [
-  { value: "vendor", label: "Seller" },
-  { value: "relay", label: "Relay Point" },
+  { value: "vendor", label: "Seller", icon: BuildingStorefrontIcon },
+  { value: "relay", label: "Relay Point", icon: TruckIcon },
 ];
 
 const dashboardRoute = {
@@ -25,6 +33,7 @@ const AuthLogin = () => {
   const [role, setRole] = useState(getInitialRole(location.pathname));
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("123123");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,50 +44,173 @@ const AuthLogin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-primary-light font-sans">
-      <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl flex overflow-hidden border border-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 via-white to-secondary-50 p-4">
+      <div className="w-full max-w-6xl bg-white rounded-3xl shadow-strong flex overflow-hidden border border-neutral-100">
         {/* Left: Form */}
-        <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
-          <div className="mb-8 flex items-center gap-2">
-            <span className="text-2xl font-extrabold text-primary">ColisPoint <span className="text-accent">DZ</span></span>
-          </div>
-          <h2 className="text-3xl font-bold mb-2">Welcome Back!</h2>
-          <p className="text-gray-500 mb-8">Sign in to your account to access your dashboard.</p>
-          <div className="flex mb-8 rounded overflow-hidden bg-gray-50">
-            {roles.map(r => (
-              <button
-                key={r.value}
-                onClick={() => setRole(r.value)}
-                className={`flex-1 py-2 font-semibold transition text-lg flex items-center justify-center gap-2 ${role === r.value ? "bg-primary text-white shadow" : "text-gray-500 bg-gray-50 hover:bg-primary-light hover:text-primary"}`}
-                style={{ borderBottom: role === r.value ? '3px solid #2563eb' : '3px solid transparent' }}
-              >
-                {r.value === "vendor" ? <ArrowRightOnRectangleIcon className="w-5 h-5" /> : <ArrowRightOnRectangleIcon className="w-5 h-5 rotate-180" />} {r.label} Login
-              </button>
-            ))}
-          </div>
-          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-            <div className="relative">
-              <EnvelopeIcon className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-primary" />
-              <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} className="pl-10 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary w-full font-medium" />
+        <div className="w-full lg:w-1/2 p-12 flex flex-col justify-center">
+          {/* Logo */}
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-2 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl shadow-soft">
+              <TruckIcon className="w-7 h-7 text-white" />
             </div>
-            <div className="relative">
-              <KeyIcon className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-primary" />
-              <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} className="pl-10 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary w-full font-medium" />
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold gradient-text">
+                ColisPoint
+              </span>
+              <span className="text-xs font-medium text-neutral-500 -mt-1">
+                DZ
+              </span>
             </div>
-            <button type="submit" className="w-full bg-primary text-white py-2 rounded font-semibold hover:bg-primary-dark transition text-lg shadow-md flex items-center justify-center gap-2" disabled={loading}>
-              <ArrowRightOnRectangleIcon className="w-5 h-5" /> {loading ? "Logging in..." : "Login"}
+          </div>
+
+          <h2 className="text-4xl font-bold text-neutral-800 mb-2">
+            Welcome Back!
+          </h2>
+          <p className="text-neutral-600 mb-8 text-lg">
+            Sign in to your account to access your dashboard.
+          </p>
+
+          {/* Role Selection */}
+          <div className="grid grid-cols-2 gap-4 mb-8">
+            {roles.map((r) => {
+              const IconComponent = r.icon;
+              return (
+                <button
+                  key={r.value}
+                  onClick={() => setRole(r.value)}
+                  className={`p-4 rounded-xl font-semibold transition-all duration-200 flex flex-col items-center gap-2 border-2 ${
+                    role === r.value
+                      ? "bg-gradient-to-br from-primary-500 to-secondary-500 text-white border-primary-300 shadow-medium"
+                      : "bg-neutral-50 text-neutral-700 border-neutral-200 hover:border-primary-300 hover:bg-primary-50"
+                  }`}
+                >
+                  <IconComponent className="w-6 h-6" />
+                  <span className="text-sm">{r.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            {/* Email Input */}
+            <div className="relative">
+              <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                Email Address
+              </label>
+              <div className="relative">
+                <EnvelopeIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="input-field pl-12"
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Password Input */}
+            <div className="relative">
+              <label className="block text-sm font-semibold text-neutral-700 mb-2">
+                Password
+              </label>
+              <div className="relative">
+                <KeyIcon className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="input-field pl-12 pr-12"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-primary-500 transition-colors"
+                >
+                  {showPassword ? (
+                    <EyeSlashIcon className="w-5 h-5" />
+                  ) : (
+                    <EyeIcon className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="btn-primary w-full text-lg py-4"
+              disabled={loading}
+            >
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Logging in...
+                </div>
+              ) : (
+                <>
+                  <ArrowRightOnRectangleIcon className="w-6 h-6" />
+                  Sign In
+                </>
+              )}
             </button>
-            {error && <div className="text-red-500 text-sm text-center">{error}</div>}
+
+            {error && (
+              <div className="p-4 bg-error-50 border-l-4 border-error-500 rounded-r-xl">
+                <p className="text-error-700 font-medium">{error}</p>
+              </div>
+            )}
           </form>
-          <div className="text-xs text-gray-400 mt-6 text-center">Use <b>test@test.com</b> / <b>123123</b> for all roles.</div>
+
+          {/* Demo Credentials */}
+          <div className="mt-8 p-4 bg-gradient-to-r from-primary-50 to-secondary-50 rounded-xl border border-primary-200">
+            <p className="text-sm text-neutral-600 text-center">
+              <span className="font-semibold">Demo Credentials:</span>{" "}
+              test@test.com / 123123
+            </p>
+          </div>
         </div>
+
         {/* Right: Image + Overlay */}
-        <div className="hidden md:block w-1/2 relative bg-gray-100">
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Plant" className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-            <div className="bg-white/70 rounded-xl p-6 max-w-xs text-center shadow-lg">
-              <h3 className="text-lg font-bold text-gray-800 mb-2">Efficient, Decentralized Delivery</h3>
-              <p className="text-gray-600 text-sm">ColisPoint DZ connects sellers, relay points, and customers for a seamless logistics experience across Algeria.</p>
+        <div className="hidden lg:block w-1/2 relative bg-gradient-to-br from-primary-100 to-secondary-100">
+          <img
+            src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
+            alt="Delivery logistics"
+            className="absolute inset-0 w-full h-full object-cover opacity-80"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-600/20 to-secondary-600/20 flex items-center justify-center">
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 max-w-sm mx-8 shadow-strong">
+              <h3 className="text-2xl font-bold text-neutral-800 mb-4">
+                Smart Logistics Platform
+              </h3>
+              <p className="text-neutral-600 leading-relaxed">
+                Join ColisPoint DZ's revolutionary delivery network. Connect
+                with customers, reduce failed deliveries, and grow your business
+                with our decentralized logistics solution.
+              </p>
+              <div className="flex items-center gap-4 mt-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-success-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-neutral-700">
+                    Secure
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-primary-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-neutral-700">
+                    Efficient
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-secondary-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-neutral-700">
+                    Reliable
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -87,4 +219,4 @@ const AuthLogin = () => {
   );
 };
 
-export default AuthLogin; 
+export default AuthLogin;

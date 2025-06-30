@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Navbar from "./components/Navbar";
 import LandingPage from "./pages/LandingPage";
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -20,28 +25,37 @@ function AppRoutes() {
       <Route path="/" element={<LandingPage />} />
       {/* Admin */}
       <Route path="/admin" element={<AdminLogin />} />
-      <Route path="/admin/dashboard" element={
-        <PrivateRoute role="admin">
-          <AdminDashboard />
-        </PrivateRoute>
-      } />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <PrivateRoute role="admin">
+            <AdminDashboard />
+          </PrivateRoute>
+        }
+      />
       {/* Vendor & Relay Auth */}
       <Route path="/vendor/login" element={<AuthLogin />} />
       <Route path="/relay/login" element={<AuthLogin />} />
       <Route path="/vendor/register" element={<AuthRegister />} />
       <Route path="/relay/register" element={<AuthRegister />} />
       {/* Vendor Dashboard */}
-      <Route path="/vendor/dashboard" element={
-        <PrivateRoute role="vendor">
-          <VendorDashboard />
-        </PrivateRoute>
-      } />
+      <Route
+        path="/vendor/dashboard"
+        element={
+          <PrivateRoute role="vendor">
+            <VendorDashboard />
+          </PrivateRoute>
+        }
+      />
       {/* Relay Dashboard */}
-      <Route path="/relay/dashboard" element={
-        <PrivateRoute role="relay">
-          <RelayDashboard />
-        </PrivateRoute>
-      } />
+      <Route
+        path="/relay/dashboard"
+        element={
+          <PrivateRoute role="relay">
+            <RelayDashboard />
+          </PrivateRoute>
+        }
+      />
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
@@ -52,7 +66,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="min-h-screen bg-gray-50 text-gray-900">
+        <div className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary-50 to-secondary-50 text-neutral-900">
           <Navbar />
           <AppRoutes />
         </div>
