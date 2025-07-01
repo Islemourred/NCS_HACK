@@ -196,7 +196,8 @@ const VendorOrdersTab = () => {
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
           <form
-            className="bg-white rounded-xl p-8 w-full max-w-2xl shadow-lg space-y-4"
+            className="bg-white rounded-xl p-8 w-full max-w-2xl shadow-lg space-y-4 overflow-y-auto"
+            style={{ maxHeight: "80vh" }}
             onSubmit={handleSave}
           >
             <h4 className="text-xl font-bold mb-4">

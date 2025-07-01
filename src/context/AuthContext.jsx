@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { login as apiLogin } from "../utils/api";
+import { login as apiLogin } from "../utils/api_users";
 
 const AuthContext = createContext();
 
@@ -8,7 +8,9 @@ export function AuthProvider({ children }) {
     const saved = localStorage.getItem("colis_auth");
     return saved ? JSON.parse(saved) : null;
   });
-  const [token, setToken] = useState(() => localStorage.getItem("colis_token") || null);
+  const [token, setToken] = useState(
+    () => localStorage.getItem("colis_token") || null
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -22,11 +24,11 @@ export function AuthProvider({ children }) {
     }
   }, [user, token]);
 
-  const login = async (email, password, role) => {
+  const login = async (numero_de_telephone, password) => {
     setLoading(true);
     setError(null);
     try {
-      const { token, user } = await apiLogin(email, password, role);
+      const { token, user } = await apiLogin(numero_de_telephone, password);
       setUser(user);
       setToken(token);
       setLoading(false);
@@ -44,7 +46,9 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, error, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, token, loading, error, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -52,4 +56,4 @@ export function AuthProvider({ children }) {
 
 export function useAuth() {
   return useContext(AuthContext);
-} 
+}

@@ -8,6 +8,7 @@ import {
   TruckIcon,
   EyeIcon,
   EyeSlashIcon,
+  DevicePhoneMobileIcon,
 } from "@heroicons/react/24/outline";
 import logo from "../../assets/logo.png";
 
@@ -16,14 +17,15 @@ const dashboardRoute = "/admin/dashboard";
 const AdminLogin = () => {
   const { login, loading, error } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState("test@test.com");
+  const [numero_de_telephone, setNumeroDeTelephone] = useState("");
   const [password, setPassword] = useState("123123");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = await login(email, password, "admin");
-    if (user) {
+    const userData = await login(numero_de_telephone, password);
+    console.log(userData);
+    if (userData) {
       navigate(dashboardRoute);
     }
   };
@@ -49,18 +51,18 @@ const AdminLogin = () => {
           </p>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Email Input */}
+            {/* Phone Input */}
             <div className="relative">
               <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                عنوان البريد الإلكتروني
+                رقم الهاتف
               </label>
               <div className="relative">
-                <EnvelopeIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                <DevicePhoneMobileIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                 <input
-                  type="email"
-                  placeholder="أدخل بريدك الإلكتروني"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  placeholder="أدخل رقم هاتفك"
+                  value={numero_de_telephone}
+                  onChange={(e) => setNumeroDeTelephone(e.target.value)}
                   className="input-field pr-12"
                   required
                 />

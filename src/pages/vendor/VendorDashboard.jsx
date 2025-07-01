@@ -86,13 +86,6 @@ const mockData = {
       color: "success",
       change: "+22%",
     },
-    {
-      title: "الأرباح الشهرية",
-      value: "42,350 د.ج",
-      icon: CurrencyDollarIcon,
-      color: "secondary",
-      change: "+12%",
-    },
   ],
   recentOrders: orderData,
   relayPoints: [
@@ -234,7 +227,6 @@ const VendorDashboard = () => {
 
         {/*
 
-Islem L3ziz, [30/06/2025 19:19]
 Profile Tab */}
         {activeTab === "profile" && (
           <div className="space-y-6">

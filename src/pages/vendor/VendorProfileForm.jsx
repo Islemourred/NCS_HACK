@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 const VendorProfileForm = () => {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
+    name: "العربي محمد أشرف",
+    email: "larbiachraf@gmail.com",
+    phone: "0888888888",
   });
 
   const handleChange = (e) => {
@@ -51,4 +51,4 @@ const VendorProfileForm = () => {
   );
 };
 
-export default VendorProfileForm; 
+export default VendorProfileForm;

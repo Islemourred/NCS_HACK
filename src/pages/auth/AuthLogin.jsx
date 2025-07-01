@@ -9,6 +9,7 @@ import {
   BuildingStorefrontIcon,
   EyeIcon,
   EyeSlashIcon,
+  DevicePhoneMobileIcon,
 } from "@heroicons/react/24/outline";
 import logo from "../../assets/logo.png";
 
@@ -32,13 +33,13 @@ const AuthLogin = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [role, setRole] = useState(getInitialRole(location.pathname));
-  const [email, setEmail] = useState("test@test.com");
+  const [numero_de_telephone, setNumeroDeTelephone] = useState("");
   const [password, setPassword] = useState("123123");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = await login(email, password, role);
+    const user = await login(numero_de_telephone, password);
     if (user) {
       navigate(dashboardRoute[role]);
     }
@@ -86,18 +87,18 @@ const AuthLogin = () => {
           </div>
 
           <form className="space-y-6" onSubmit={handleSubmit}>
-            {/* Email Input */}
+            {/* Phone Input */}
             <div className="relative">
               <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                عنوان البريد الإلكتروني
+                رقم الهاتف
               </label>
               <div className="relative">
-                <EnvelopeIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                <DevicePhoneMobileIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                 <input
-                  type="email"
-                  placeholder="أدخل بريدك الإلكتروني"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  placeholder="أدخل رقم هاتفك"
+                  value={numero_de_telephone}
+                  onChange={(e) => setNumeroDeTelephone(e.target.value)}
                   className="input-field pr-12"
                   required
                 />

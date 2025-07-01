@@ -38,7 +38,7 @@ function AppRoutes() {
       <Route
         path="/admin/dashboard"
         element={
-          <PrivateRoute role="admin">
+          <PrivateRoute role="ADMIN">
             <AdminDashboard />
           </PrivateRoute>
         }
@@ -52,7 +52,7 @@ function AppRoutes() {
       <Route
         path="/vendor/dashboard"
         element={
-          <PrivateRoute role="vendor">
+          <PrivateRoute role="VENDOR">
             <VendorDashboard />
           </PrivateRoute>
         }
@@ -61,7 +61,7 @@ function AppRoutes() {
       <Route
         path="/relay/dashboard"
         element={
-          <PrivateRoute role="relay">
+          <PrivateRoute role="RELAY_OPERATOR">
             <RelayDashboard />
           </PrivateRoute>
         }

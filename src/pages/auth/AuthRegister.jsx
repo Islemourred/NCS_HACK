@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 import {
   ArrowRightOnRectangleIcon,
   EnvelopeIcon,
@@ -16,15 +15,17 @@ import {
   CheckCircleIcon,
 } from "@heroicons/react/24/outline";
 import logo from "../../assets/logo.png";
+import { register as apiRegister } from "../../utils/api_users";
 
 const roles = [
-  { value: "vendor", label: "بائع", icon: BuildingStorefrontIcon },
-  { value: "relay", label: "نقطة ترحيل", icon: TruckIcon },
+  { value: "VENDOR", label: "بائع", icon: BuildingStorefrontIcon },
+  { value: "RELAY_OPERATOR", label: "نقطة ترحيل", icon: TruckIcon },
 ];
 
 function getInitialRole(pathname) {
-  if (pathname.includes("relay")) return "relay";
-  return "vendor";
+  if (pathname.includes("relay")) return "RELAY_OPERATOR";
+  else if (pathname.includes("vendor")) return "VENDOR";
+  else return "ADMIN";
 }
 
 const AuthRegister = () => {
@@ -32,13 +33,11 @@ const AuthRegister = () => {
   const location = useLocation();
   const [role, setRole] = useState(getInitialRole(location.pathname));
   const [form, setForm] = useState({
-    name: "",
-    email: "",
+    nom: "",
+    prenom: "",
     password: "",
     phone: "",
-    region: "",
-    address: "",
-    hours: "",
+    role: role,
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -47,17 +46,30 @@ const AuthRegister = () => {
   const handleChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
+    setSuccess(false);
+    try {
+      // Map form fields to backend expected fields
+      const payload = {
+        nom: form.nom,
+        prenom: form.prenom,
+        password: form.password,
+        numero_de_telephone: form.phone,
+        role: role,
+      };
+      await apiRegister(payload);
       setLoading(false);
       setSuccess(true);
       setTimeout(
-        () => navigate(role === "vendor" ? "/vendor/login" : "/relay/login"),
+        () => navigate(role === "VENDOR" ? "/vendor/login" : "/relay/login"),
         1200
       );
-    }, 1000);
+    } catch (err) {
+      setLoading(false);
+      alert(err.message);
+    }
   };
 
   return (
@@ -110,28 +122,27 @@ const AuthRegister = () => {
               <div className="relative">
                 <UserIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                 <input
-                  name="name"
+                  name="nom"
                   type="text"
                   placeholder="أدخل اسمك"
-                  value={form.name}
+                  value={form.nom}
                   onChange={handleChange}
                   className="input-field pr-12"
                   required
                 />
               </div>
             </div>
-            {/* Email Input */}
             <div className="relative">
               <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                عنوان البريد الإلكتروني
+                اللقب
               </label>
               <div className="relative">
-                <EnvelopeIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
+                <UserIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
                 <input
-                  name="email"
-                  type="email"
-                  placeholder="أدخل بريدك الإلكتروني"
-                  value={form.email}
+                  name="prenom"
+                  type="text"
+                  placeholder="أدخل اللقب"
+                  value={form.prenom}
                   onChange={handleChange}
                   className="input-field pr-12"
                   required
@@ -185,64 +196,7 @@ const AuthRegister = () => {
                 />
               </div>
             </div>
-            {/* Vendor/Relay Specific Fields */}
-            {role === "vendor" && (
-              <div className="relative">
-                <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                  المنطقة (الولاية)
-                </label>
-                <div className="relative">
-                  <MapPinIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
-                  <input
-                    name="region"
-                    type="text"
-                    placeholder="أدخل منطقتك (الولاية)"
-                    value={form.region}
-                    onChange={handleChange}
-                    className="input-field pr-12"
-                    required
-                  />
-                </div>
-              </div>
-            )}
-            {role === "relay" && (
-              <>
-                <div className="relative">
-                  <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                    العنوان
-                  </label>
-                  <div className="relative">
-                    <MapPinIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
-                    <input
-                      name="address"
-                      type="text"
-                      placeholder="أدخل عنوانك"
-                      value={form.address}
-                      onChange={handleChange}
-                      className="input-field pr-12"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="relative">
-                  <label className="block text-sm font-semibold text-neutral-700 mb-2">
-                    ساعات العمل
-                  </label>
-                  <div className="relative">
-                    <ClockIcon className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 text-primary-500" />
-                    <input
-                      name="hours"
-                      type="text"
-                      placeholder="ساعات العمل (مثال: 09:00-19:00)"
-                      value={form.hours}
-                      onChange={handleChange}
-                      className="input-field pr-12"
-                      required
-                    />
-                  </div>
-                </div>
-              </>
-            )}
+
             {/* Submit Button */}
             <button
               type="submit"
