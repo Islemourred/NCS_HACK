@@ -32,6 +32,7 @@ import logoWhite from "../assets/logo2.png";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import heroIMG from '../assets/heroIMG.jpg'
+import Spline from '@splinetool/react-spline';
 
 const features = [
   {
@@ -146,71 +147,48 @@ const LandingPage = () => {
   return (
     <div className="flex flex-col w-full min-h-screen bg-white" dir="rtl">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-red-50 via-white to-pink-50 pt-20 pb-32" data-aos="fade-up">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: {heroIMG}
-          }}
-        ></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-red-50 via-white to-pink-50 pt-20 pb-32 min-h-screen w-full flex items-center" data-aos="fade-up">
+        <div className="absolute inset-0 w-full h-full z-0">
+          <Spline scene="https://prod.spline.design/THIT3jrNnhkas2fa/scene.splinecode" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="text-center lg:text-right">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-100 to-pink-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold mb-8 animate-bounce" data-aos="fade-right">
-                <Sparkles className="w-4 h-4" />
-                ثورة في شبكة التوصيل الجزائرية
-              </div>
-
-              <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight" data-aos="fade-right">
-                <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
-                  وصلي
-                </span>
-                <br />
-                <span className="text-gray-900">تسليم ذكي</span>
-              </h1>
-
-              <p className="text-xl text-gray-600 mb-10 max-w-2xl leading-relaxed" data-aos="fade-right">
-                منصة لوجستية لامركزية تربط البائعين ونقاط الترحيل والعملاء.
-                <span className="font-semibold text-red-600"> صفر تسليمات فاشلة.</span>
-                <span className="font-semibold text-pink-600"> أقصى راحة.</span>
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12" data-aos="fade-right">
-                <a href="#track" className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-                  <Truck className="w-6 h-6" />
-                  تتبع طردك
-                </a>
-                <a href="#demo" className="inline-flex items-center justify-center gap-3 border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:border-red-500 hover:text-red-600 transition-all duration-300">
-                  <Play className="w-6 h-6" />
-                  شاهد العرض التوضيحي
-                </a>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8" data-aos="fade-right">
-                {stats.map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative">
-              <div className="relative w-full max-w-lg mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-br from-red-200 to-pink-200 rounded-3xl transform rotate-6 opacity-20"></div>
-                <div className="relative bg-white rounded-3xl shadow-2xl p-8">
-                  <img
-                    src={heroIMG}
-                    alt="Delivery Network"
-                    className="w-full h-80 object-cover rounded-2xl mb-6"
-                  />
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">شبكة توصيل متطورة</h3>
-                    <p className="text-gray-600">متصل. فعال. موثوق.</p>
-                  </div>
+              <div className="bg-white/30 backdrop-blur-lg rounded-3xl border border-white/40 shadow-2xl p-10 m-4 relative z-20" style={{boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)', transform: 'perspective(800px) rotateY(-8deg)'}}>
+                <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-100 to-pink-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold mb-8 animate-bounce" data-aos="fade-right">
+                  <Sparkles className="w-4 h-4" />
+                  ثورة في شبكة التوصيل الجزائرية
+                </div>
+                <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight" data-aos="fade-right">
+                  <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
+                    وصلي
+                  </span>
+                  <br />
+                  <span className="text-gray-900">تسليم ذكي</span>
+                </h1>
+                <p className="text-xl text-gray-600 mb-10 max-w-2xl leading-relaxed" data-aos="fade-right">
+                  منصة لوجستية لامركزية تربط البائعين ونقاط الترحيل والعملاء.
+                  <span className="font-semibold text-red-600"> صفر تسليمات فاشلة.</span>
+                  <span className="font-semibold text-pink-600"> أقصى راحة.</span>
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12" data-aos="fade-right">
+                  <a href="#track" className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <Truck className="w-6 h-6" />
+                    تتبع طردك
+                  </a>
+                  <a href="#demo" className="inline-flex items-center justify-center gap-3 border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:border-red-500 hover:text-red-600 transition-all duration-300">
+                    <Play className="w-6 h-6" />
+                    شاهد العرض التوضيحي
+                  </a>
+                </div>
+                {/* Stats */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8" data-aos="fade-right">
+                  {stats.map((stat, index) => (
+                    <div key={index} className="text-center">
+                      <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
+                      <div className="text-sm text-gray-600">{stat.label}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
