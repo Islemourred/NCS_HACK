@@ -91,10 +91,11 @@ const Navbar = () => {
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="p-2 bg-neutral-100 hover:bg-error-100 text-neutral-600 hover:text-error-600 rounded-xl transition-all duration-200 group"
+                    className="p-2 bg-neutral-100 hover:bg-error-100 text-neutral-600 hover:text-error-600 rounded-xl transition-all duration-200 group flex items-center gap-2"
                     title="تسجيل الخروج"
                   >
                     <ArrowRightOnRectangleIcon className="w-5 h-5 group-hover:-rotate-12 transition-transform duration-200" />
+                    <span className="hidden sm:inline font-medium">تسجيل الخروج</span>
                   </button>
                 </div>
               </div>
