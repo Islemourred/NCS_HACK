@@ -6,6 +6,8 @@ import {
   EyeIcon,
   PencilIcon,
   TrashIcon,
+  XMarkIcon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import { RELAY_POINTS } from "../../utils/relayPointsData";
 
@@ -95,9 +97,10 @@ const RelaysTab = () => {
           </button>
         </div>
       </div>
-      <div className="overflow-x-auto">
+      {/* Table Container */}
+      <div className="bg-white rounded-xl shadow p-4 overflow-x-auto">
         <table className="w-full">
-          <thead>
+          <thead className="bg-neutral-50 sticky top-0 z-10">
             <tr className="border-b border-neutral-200">
               <th className="py-3 text-right">العنوان</th>
               <th className="py-3 text-right">الولاية</th>
@@ -110,10 +113,12 @@ const RelaysTab = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredRelays.map((relay) => (
+            {filteredRelays.map((relay, idx) => (
               <tr
                 key={relay.id}
-                className="border-b border-neutral-100 hover:bg-neutral-50"
+                className={`border-b border-neutral-100 hover:bg-primary-50 transition ${
+                  idx % 2 === 0 ? "bg-neutral-50" : "bg-white"
+                }`}
               >
                 <td className="py-3">{relay.address}</td>
                 <td className="py-3">
@@ -141,10 +146,10 @@ const RelaysTab = () => {
                 <td className="py-3">
                   <div className="flex gap-2">
                     <button
-                      className="p-2 text-warning-600 hover:bg-warning-100 rounded-lg transition-colors"
+                      className="p-2 text-warning-600 hover:bg-warning-100 rounded-lg transition-colors flex items-center gap-1"
                       onClick={() => openEditModal(relay)}
                     >
-                      <PencilIcon className="w-4 h-4" />
+                      <PencilIcon className="w-4 h-4" /> تعديل
                     </button>
                   </div>
                 </td>
@@ -152,7 +157,10 @@ const RelaysTab = () => {
             ))}
             {filteredRelays.length === 0 && (
               <tr>
-                <td colSpan={8} className="py-6 text-center text-neutral-400">
+                <td
+                  colSpan={8}
+                  className="py-6 text-center text-neutral-400 bg-white"
+                >
                   لا توجد نقاط ترحيل بعد.
                 </td>
               </tr>
@@ -163,23 +171,34 @@ const RelaysTab = () => {
       {/* Edit Status Modal */}
       {editId && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-8 w-full max-w-md shadow-lg">
+          <div className="bg-white rounded-xl p-8 w-full max-w-md shadow-lg relative">
+            <button
+              type="button"
+              className="absolute top-4 left-4 text-neutral-400 hover:text-neutral-600"
+              onClick={closeEditModal}
+            >
+              <XMarkIcon className="w-6 h-6" />
+            </button>
             <h4 className="text-lg font-bold mb-4">تغيير حالة نقطة الترحيل</h4>
+            <hr className="mb-4" />
             <div className="mb-4">
               <label className="block mb-2 font-semibold">الحالة الجديدة</label>
-              <select
-                className="input-field w-full"
-                value={editStatus}
-                onChange={(e) => setEditStatus(e.target.value)}
-              >
-                {STATUS_CHOICES.map((s) => (
-                  <option key={s.value} value={s.value}>
-                    {s.label}
-                  </option>
-                ))}
-              </select>
+              <div className="relative w-full">
+                <select
+                  className="input-field appearance-none w-full pl-3 pr-8 py-2 rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition"
+                  value={editStatus}
+                  onChange={(e) => setEditStatus(e.target.value)}
+                >
+                  {STATUS_CHOICES.map((s) => (
+                    <option key={s.value} value={s.value}>
+                      {s.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDownIcon className="w-5 h-5 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400" />
+              </div>
             </div>
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-end gap-2 mt-4">
               <button className="btn-secondary" onClick={closeEditModal}>
                 إلغاء
               </button>

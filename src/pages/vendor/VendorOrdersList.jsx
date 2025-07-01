@@ -73,7 +73,7 @@ const VendorOrdersList = ({
                   تعديل
                 </button>
                 <button
-                  className="btn-error text-xs"
+                  className="btn-secondary text-xs"
                   onClick={() => onDelete(idx)}
                 >
                   حذف

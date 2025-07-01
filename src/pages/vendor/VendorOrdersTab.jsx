@@ -5,6 +5,8 @@ import {
   PlusIcon,
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
+import { RELAY_POINTS } from "../../utils/relayPointsData";
+import initialOrders from "../../utils/vendorOrdersData";
 
 const STATUS_LABELS = {
   CREATED: "تم الإنشاء",
@@ -31,90 +33,6 @@ const STATUS_COLORS = {
   LOST: "red",
   DAMAGED: "red",
 };
-
-const RELAY_POINTS = [
-  {
-    id: 1,
-    name: "متجر الأمين",
-    address: "شارع ديدوش مراد، الجزائر العاصمة",
-    wilaya: { code: "16", name: "الجزائر العاصمة" },
-  },
-  {
-    id: 2,
-    name: "سوبر ماركت النور",
-    address: "حي الأمير عبد القادر، وهران",
-    wilaya: { code: "31", name: "وهران" },
-  },
-  {
-    id: 3,
-    name: "مكتبة المعرفة",
-    address: "حي أول نوفمبر، قسنطينة",
-    wilaya: { code: "25", name: "قسنطينة" },
-  },
-  {
-    id: 4,
-    name: "صيدلية الشفاء",
-    address: "حي الثورة، عنابة",
-    wilaya: { code: "23", name: "عنابة" },
-  },
-];
-
-const initialOrders = [
-  {
-    tracking_number: "DZ001234",
-    order: {
-      vendor: "أحمد متجر الإلكترونيات",
-      product: "هاتف ذكي سامسونج S21",
-      client_name: "فاطمة الزهراء",
-      client_phone: "+213 555 111 222",
-      client_address: "شارع الحرية، الجزائر العاصمة",
-      relay_point: "نقطة ترحيل باب الزوار",
-    },
-    status: "ARRIVED_AT_RELAY",
-    package_weight: 2.5,
-    package_type: "Standard",
-    fragile: true,
-    estimated_delivery: "2024-06-10T15:00:00Z",
-    notes: "يرجى التعامل بحذر",
-    created_at: "2024-06-01T10:00:00Z",
-  },
-  {
-    tracking_number: "DZ001235",
-    order: {
-      product: "قميص رجالي كلاسيكي",
-      client_name: "يوسف العلي",
-      client_phone: "+213 555 333 444",
-      client_address: "حي النصر، وهران",
-      vendor: "سوق النور للأزياء",
-      relay_point: "نقطة ترحيل وهران المركزية",
-    },
-    status: "DELIVERED",
-    package_weight: 1.2,
-    package_type: "Express",
-    fragile: false,
-    estimated_delivery: "2024-06-09T12:00:00Z",
-    notes: "",
-    created_at: "2024-06-02T09:00:00Z",
-  },
-  {
-    tracking_number: "DZ001236",
-    order: {
-      product: "مكمل غذائي للأطفال",
-      client_name: "زينب حسني",
-      client_phone: "+213 555 555 666",
-      client_address: "حي الورود، البليدة",
-      vendor: "صيدلية الشفاء",
-      relay_point: "نقطة ترحيل البليدة",
-    },
-    status: "READY_FOR_PICKUP",
-    package_weight: 0.8,
-    package_type: "Standard",
-    fragile: false,
-    estimated_delivery: "2024-06-11T17:00:00Z",
-    notes: "",
-    created_at: "2024-06-03T11:00:00Z",
-  },
-];
 
 const getStatusColor = (status) => STATUS_COLORS[status] || "gray";
 const getStatusText = (status) => STATUS_LABELS[status] || status;
@@ -415,7 +333,7 @@ const VendorOrdersTab = () => {
                 إلغاء
               </button>
               <button
-                className="btn-error"
+                className=" btn-primary"
                 onClick={() => handleDelete(deleteIndex)}
               >
                 حذف

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { RELAY_POINTS } from "../../utils/relayPointsData";
 
 const WILAYA_LIST = [
   { code: "16", name: "الجزائر العاصمة" },
@@ -26,11 +27,6 @@ const mockEmploymentPosts = [
     space: "80 متر مربع",
     status: "ACTIVE",
   },
-];
-
-const mockUserRelayPoints = [
-  { id: 1, name: "شارع ديدوش مراد، الجزائر العاصمة" },
-  { id: 2, name: "حي الأمير عبد القادر، وهران" },
 ];
 
 const STATUS_LABELS = {
@@ -78,9 +74,13 @@ const EmploymentApplications = () => {
         relay_point_name: form.relay_point_name,
         status: "PENDING",
         applied_at: new Date().toISOString(),
-        store_image: form.store_image,
-        commerce_register: form.commerce_register,
-        id_card: form.id_card,
+        store_image: form.store_image
+          ? URL.createObjectURL(form.store_image)
+          : null,
+        commerce_register: form.commerce_register
+          ? URL.createObjectURL(form.commerce_register)
+          : null,
+        id_card: form.id_card ? URL.createObjectURL(form.id_card) : null,
       },
     ]);
     setShowFormFor(null);
@@ -222,8 +222,8 @@ const EmploymentApplications = () => {
                       required
                     >
                       <option value="">اختر نقطة الترحيل</option>
-                      {mockUserRelayPoints.map((point) => (
-                        <option key={point.id} value={point.name}>
+                      {RELAY_POINTS.map((point) => (
+                        <option key={point.id} value={point.address}>
                           {point.name}
                         </option>
                       ))}
@@ -348,13 +348,37 @@ const EmploymentApplications = () => {
                       {new Date(app.applied_at).toLocaleString()}
                     </td>
                     <td className="py-3">
-                      {app.store_image ? app.store_image.name : "-"}
+                      {app.store_image ? (
+                        <img
+                          src={app.store_image}
+                          alt="صورة المحل"
+                          className="w-16 h-16 object-cover rounded-lg mx-auto"
+                        />
+                      ) : (
+                        "-"
+                      )}
                     </td>
                     <td className="py-3">
-                      {app.commerce_register ? app.commerce_register.name : "-"}
+                      {app.commerce_register ? (
+                        <img
+                          src={app.commerce_register}
+                          alt="سجل تجاري"
+                          className="w-16 h-16 object-cover rounded-lg mx-auto"
+                        />
+                      ) : (
+                        "-"
+                      )}
                     </td>
                     <td className="py-3">
-                      {app.id_card ? app.id_card.name : "-"}
+                      {app.id_card ? (
+                        <img
+                          src={app.id_card}
+                          alt="بطاقة الهوية"
+                          className="w-16 h-16 object-cover rounded-lg mx-auto"
+                        />
+                      ) : (
+                        "-"
+                      )}
                     </td>
                     <td className="py-3">{app.relay_point_name}</td>
                   </tr>

@@ -30,3 +30,12 @@ export async function register(userData) {
   }
   return res.json();
 }
+
+export async function fetchAllUsers() {
+  const res = await fetch(`${API_BASE}/admin/users/`);
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.errorMessage || "Failed to fetch users");
+  }
+  return res.json();
+}
