@@ -7,20 +7,18 @@ import {
   CheckCircleIcon,
   XCircleIcon,
   PlusIcon,
-  MagnifyingGlassIcon,
   BellIcon,
 } from "@heroicons/react/24/outline";
 import VendorTabsNav from "./VendorTabsNav";
 import VendorStatsGrid from "./VendorStatsGrid";
 import VendorProfileForm from "./VendorProfileForm";
 // import VendorRecentOrdersTable from "./VendorRecentOrdersTable";
-import VendorOrdersList from "./VendorOrdersList";
-import VendorRelayPointsList from "./VendorRelayPointsList";
 import VendorRelayPointsTab from "./VendorRelayPointsTab";
 import VendorPerformanceStats from "./VendorPerformanceStats";
 import VendorSettingsNotifications from "./VendorSettingsNotifications";
 import VendorSettingsDelivery from "./VendorSettingsDelivery";
 import VendorRelayPointsMap from "./VendorRelayPointsMap";
+import VendorOrdersTab from "./VendorOrdersTab";
 
 const orderData = [
   {
@@ -229,42 +227,7 @@ const VendorDashboard = () => {
         )}
 
         {/* Orders Tab */}
-        {activeTab === "orders" && (
-          <div className="space-y-6">
-            <div className="flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-neutral-800">
-                إدارة الطلبات
-              </h3>
-              <div className="flex gap-4">
-                <select className="input-field w-40">
-                  <option>جميع الحالات</option>
-                  <option>في الانتظار</option>
-                  <option>قيد التوصيل</option>
-                  <option>تم التسليم</option>
-                  <option>ملغي</option>
-                </select>
-                <div className="relative">
-                  <MagnifyingGlassIcon className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-                  <input
-                    type="text"
-                    placeholder="البحث في الطلبات..."
-                    className="input-field pr-10 w-64"
-                  />
-                </div>
-                <button className="btn-primary gap-2">
-                  <PlusIcon className="w-5 h-5" />
-                  طلب جديد
-                </button>
-              </div>
-            </div>
-            <VendorOrdersList
-              recentOrders={mockData.recentOrders}
-              getStatusIcon={getStatusIcon}
-              getStatusColor={getStatusColor}
-              getStatusText={getStatusText}
-            />
-          </div>
-        )}
+        {activeTab === "orders" && <VendorOrdersTab />}
 
         {/* Relay Points Tab */}
         {activeTab === "relay-points" && <VendorRelayPointsTab />}
