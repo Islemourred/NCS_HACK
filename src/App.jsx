@@ -38,9 +38,7 @@ function AppRoutes() {
       <Route
         path="/admin/dashboard"
         element={
-          <PrivateRoute role="ADMIN">
             <AdminDashboard />
-          </PrivateRoute>
         }
       />
       {/* Vendor & Relay Auth */}
@@ -52,18 +50,14 @@ function AppRoutes() {
       <Route
         path="/vendor/dashboard"
         element={
-          <PrivateRoute role="VENDOR">
             <VendorDashboard />
-          </PrivateRoute>
         }
       />
       {/* Relay Dashboard */}
       <Route
         path="/relay/dashboard"
         element={
-          <PrivateRoute role="RELAY_OPERATOR">
             <RelayDashboard />
-          </PrivateRoute>
         }
       />
       {/* Fallback */}
