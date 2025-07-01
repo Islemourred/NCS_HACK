@@ -280,7 +280,7 @@ const ParcelsTab = () => {
                 {selectedParcel.order.relay_point}
               </div>
             </div>
-            <div className="flex justify-end gap-2 mt-6">
+            <div className="flex justify-end gap-2 mt-60">
               <button className="btn-secondary" onClick={handleCloseDetails}>
                 إغلاق
               </button>
