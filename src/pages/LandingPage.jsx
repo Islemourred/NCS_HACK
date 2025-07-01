@@ -83,6 +83,7 @@ const LandingPage = () => {
     try {
       const parcel = await getParcel(parcelId.trim());
       setResult(parcel);
+      console.log(parcel);
     } catch {
       setError("Parcel not found - please check your tracking ID");
     } finally {
@@ -292,9 +293,7 @@ const LandingPage = () => {
                           نقطة الاستلام:
                         </span>
                         <p className="text-neutral-600">
-                          {result.relayId
-                            ? "Boutique El Amine"
-                            : "لم يتم التعيين بعد"}
+                          {result.order.relay_point}
                         </p>
                       </div>
                     </div>
@@ -303,37 +302,27 @@ const LandingPage = () => {
                       <span className="font-semibold text-neutral-700">
                         العميل:
                       </span>
-                      <span className="text-neutral-600">{result.client}</span>
+                      <span className="text-neutral-600">
+                        {result.order.client_name}
+                      </span>
                     </div>
                     <div className="flex items-center gap-3">
                       <PhoneIcon className="w-5 h-5 text-primary-600" />
                       <span className="font-semibold text-neutral-700">
                         الهاتف:
                       </span>
-                      <span className="text-neutral-600">{result.phone}</span>
+                      <span className="text-neutral-600">
+                        {result.order.client_phone}
+                      </span>
                     </div>
                     <div className="flex items-center gap-3">
                       <GlobeAltIcon className="w-5 h-5 text-primary-600" />
                       <span className="font-semibold text-neutral-700">
                         المنطقة:
                       </span>
-                      <span className="text-neutral-600">{result.region}</span>
-                    </div>
-                  </div>
-
-                  <div className="text-center">
-                    <p className="font-semibold text-neutral-700 mb-4">
-                      أظهر هذا عند الاستلام:
-                    </p>
-                    <div className="inline-block p-4 bg-white rounded-2xl shadow-medium">
-                      <QRCodeSVG
-                        value={result.id + result.pin}
-                        size={120}
-                        className="mb-3"
-                      />
-                      <div className="px-4 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-xl font-mono font-bold">
-                        PIN: {result.pin}
-                      </div>
+                      <span className="text-neutral-600">
+                        {result.order.client_address}
+                      </span>
                     </div>
                   </div>
                 </div>

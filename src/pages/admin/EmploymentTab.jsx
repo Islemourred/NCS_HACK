@@ -237,7 +237,7 @@ const EmploymentTab = ({
                                     قبول
                                   </button>
                                   <button
-                                    className="btn-sec btn-xs"
+                                    className="btn-secondary mr-2 btn-xs"
                                     onClick={() =>
                                       handleDecision(
                                         app.id,

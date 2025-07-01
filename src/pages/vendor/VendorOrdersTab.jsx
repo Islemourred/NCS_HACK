@@ -62,6 +62,7 @@ const VendorOrdersTab = () => {
   const [editIndex, setEditIndex] = useState(null);
   const [form, setForm] = useState(emptyOrder);
   const [deleteIndex, setDeleteIndex] = useState(null);
+  const [detailsOrder, setDetailsOrder] = useState(null);
 
   const openAdd = () => {
     setEditIndex(null);
@@ -107,6 +108,9 @@ const VendorOrdersTab = () => {
     setDeleteIndex(null);
   };
 
+  const openDetails = (order) => setDetailsOrder(order);
+  const closeDetails = () => setDetailsOrder(null);
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -134,14 +138,62 @@ const VendorOrdersTab = () => {
           </button>
         </div>
       </div>
-      <VendorOrdersList
-        orders={orders}
-        getStatusColor={getStatusColor}
-        getStatusText={getStatusText}
-        onEdit={openEdit}
-        onDelete={setDeleteIndex}
-      />
-      {/* Add/Edit Modal */}
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr>
+              <th className="py-2 px-4 border-b">رقم التتبع</th>
+              <th className="py-2 px-4 border-b">اسم العميل</th>
+              <th className="py-2 px-4 border-b">الحالة</th>
+              <th className="py-2 px-4 border-b">البائع</th>
+              <th className="py-2 px-4 border-b">نقطة الترحيل</th>
+              <th className="py-2 px-4 border-b">تاريخ الإنشاء</th>
+              <th className="py-2 px-4 border-b">إجراءات</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order, idx) => (
+              <tr key={order.tracking_number}>
+                <td className="py-2 px-4 border-b">{order.tracking_number}</td>
+                <td className="py-2 px-4 border-b">
+                  {order.order.client_name}
+                </td>
+                <td
+                  className={`py-2 px-4 border-b text-${getStatusColor(
+                    order.status
+                  )}-600 font-bold`}
+                >
+                  {getStatusText(order.status)}
+                </td>
+                <td className="py-2 px-4 border-b">{order.order.vendor}</td>
+                <td className="py-2 px-4 border-b">
+                  {order.order.relay_point}
+                </td>
+                <td className="py-2 px-4 border-b">
+                  {order.created_at ? order.created_at.split("T")[0] : "-"}
+                </td>
+                <td className="py-2 px-4 border-b flex gap-2">
+                  <button
+                    className="btn-secondary"
+                    onClick={() => openDetails(order)}
+                  >
+                    تفاصيل
+                  </button>
+                  <button className="btn-primary" onClick={() => openEdit(idx)}>
+                    تعديل
+                  </button>
+                  <button
+                    className="btn-secondary"
+                    onClick={() => setDeleteIndex(idx)}
+                  >
+                    حذف
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
           <form
@@ -316,7 +368,6 @@ const VendorOrdersTab = () => {
           </form>
         </div>
       )}
-      {/* Delete Confirmation */}
       {deleteIndex !== null && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
           <div className="bg-white rounded-xl p-8 w-full max-w-md shadow-lg">
@@ -337,6 +388,76 @@ const VendorOrdersTab = () => {
                 onClick={() => handleDelete(deleteIndex)}
               >
                 حذف
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {detailsOrder && (
+        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-8 w-full max-w-lg shadow-lg relative">
+            <button
+              className="absolute top-2 left-2 text-gray-500"
+              onClick={closeDetails}
+            >
+              &times;
+            </button>
+            <h4 className="text-xl font-bold mb-4">تفاصيل الطلب</h4>
+            <div className="space-y-2">
+              <div>
+                <b>رقم التتبع:</b> {detailsOrder.tracking_number}
+              </div>
+              <div>
+                <b>اسم المنتج:</b> {detailsOrder.order.product}
+              </div>
+              <div>
+                <b>اسم العميل:</b> {detailsOrder.order.client_name}
+              </div>
+              <div>
+                <b>هاتف العميل:</b> {detailsOrder.order.client_phone}
+              </div>
+              <div>
+                <b>عنوان العميل:</b> {detailsOrder.order.client_address}
+              </div>
+              <div>
+                <b>البائع:</b> {detailsOrder.order.vendor}
+              </div>
+              <div>
+                <b>نقطة الترحيل:</b> {detailsOrder.order.relay_point}
+              </div>
+              <div>
+                <b>الحالة:</b> {getStatusText(detailsOrder.status)}
+              </div>
+              <div>
+                <b>الوزن:</b> {detailsOrder.package_weight} كغ
+              </div>
+              <div>
+                <b>النوع:</b> {detailsOrder.package_type}
+              </div>
+              <div>
+                <b>هش:</b> {detailsOrder.fragile ? "نعم" : "لا"}
+              </div>
+              <div>
+                <b>تقدير التسليم:</b>{" "}
+                {detailsOrder.estimated_delivery
+                  ? detailsOrder.estimated_delivery
+                      .replace("T", " ")
+                      .slice(0, 16)
+                  : "-"}
+              </div>
+              <div>
+                <b>ملاحظات:</b> {detailsOrder.notes || "-"}
+              </div>
+              <div>
+                <b>تاريخ الإنشاء:</b>{" "}
+                {detailsOrder.created_at
+                  ? detailsOrder.created_at.replace("T", " ").slice(0, 16)
+                  : "-"}
+              </div>
+            </div>
+            <div className="flex justify-end mt-6">
+              <button className="btn-secondary" onClick={closeDetails}>
+                إغلاق
               </button>
             </div>
           </div>

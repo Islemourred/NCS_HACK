@@ -47,7 +47,10 @@ export default function VendorRelayPointsMap() {
 
       {selectedPoint && (
         <InfoWindow
-          position={selectedPoint.coords}
+          position={{
+            lat: Number(selectedPoint.latitude),
+            lng: Number(selectedPoint.longitude),
+          }}
           onCloseClick={() => setSelectedPoint(null)}
         >
           <div style={{ maxWidth: 200, lineHeight: "1.4" }}>
@@ -57,9 +60,11 @@ export default function VendorRelayPointsMap() {
             <p style={{ margin: "0.4em 0" }}>
               <strong>العنوان:</strong> {selectedPoint.address}
               <br />
-              <strong>ساعات العمل:</strong> {selectedPoint.hours}
+              <strong>ساعات العمل:</strong> {selectedPoint.opening_hours} {"-"}
+              {selectedPoint.closing_hours}
               <br />
-              <strong>تواصل:</strong> {selectedPoint.contact}
+              <strong className="text-left">تواصل:</strong>{" "}
+              {selectedPoint.contact_phone}
             </p>
           </div>
         </InfoWindow>

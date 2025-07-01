@@ -224,7 +224,7 @@ const EmploymentApplications = () => {
                       <option value="">اختر نقطة الترحيل</option>
                       {RELAY_POINTS.map((point) => (
                         <option key={point.id} value={point.address}>
-                          {point.name}
+                          {point.address}
                         </option>
                       ))}
                     </select>
