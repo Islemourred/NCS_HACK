@@ -29,9 +29,9 @@ import {
 } from "lucide-react";
 import logo from "../assets/logo.png";
 import logoWhite from "../assets/logo2.png";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import heroIMG from '../assets/heroIMG.jpg'
+import AOS from "aos";
+import "aos/dist/aos.css";
+import heroIMG from "../assets/heroIMG.jpg";
 
 const features = [
   {
@@ -78,7 +78,8 @@ const steps = [
   {
     number: "04",
     title: "استلام سهل",
-    description: "استلام مناسب من نقطة الترحيل القريبة - لا مزيد من التسليمات الفائتة!",
+    description:
+      "استلام مناسب من نقطة الترحيل القريبة - لا مزيد من التسليمات الفائتة!",
     icon: CheckCircle,
   },
 ];
@@ -94,20 +95,26 @@ const testimonials = [
   {
     name: "أحمد بن علي",
     role: "صاحب متجر إلكتروني",
-    content: "نقطة غيّرت طريقة عملي تماماً. الآن عملائي يتلقون طرودهم دون أي مشاكل والتكلفة أقل بكثير.",
-    avatar: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+    content:
+      "نقطة غيّرت طريقة عملي تماماً. الآن عملائي يتلقون طرودهم دون أي مشاكل والتكلفة أقل بكثير.",
+    avatar:
+      "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2",
   },
   {
     name: "فاطمة زهراء",
     role: "عميلة",
-    content: "خدمة ممتازة! أحب أنني يمكنني استلام طردي في أي وقت يناسبني من المتجر القريب من بيتي.",
-    avatar: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+    content:
+      "خدمة ممتازة! أحب أنني يمكنني استلام طردي في أي وقت يناسبني من المتجر القريب من بيتي.",
+    avatar:
+      "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2",
   },
   {
     name: "محمد الطاهر",
     role: "شريك نقطة ترحيل",
-    content: "الشراكة مع نقطة أضافت دخلاً إضافياً لمتجري. العملية بسيطة والدعم ممتاز.",
-    avatar: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+    content:
+      "الشراكة مع نقطة أضافت دخلاً إضافياً لمتجري. العملية بسيطة والدعم ممتاز.",
+    avatar:
+      "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2",
   },
 ];
 
@@ -133,29 +140,38 @@ const LandingPage = () => {
   };
 
   useEffect(() => {
-    AOS.init({ once: true, duration: 900, easing: 'ease-in-out' });
+    AOS.init({ once: true, duration: 900, easing: "ease-in-out" });
   }, []);
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-white" dir="rtl">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-red-50 via-white to-pink-50 pt-20 pb-32" data-aos="fade-up">
+      <section
+        className="relative overflow-hidden bg-gradient-to-br from-red-50 via-white to-pink-50 pt-20 pb-32"
+        data-aos="fade-up"
+      >
         <div
           className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: {heroIMG}
+            backgroundImage: { heroIMG },
           }}
         ></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="text-center lg:text-right">
-              <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-100 to-pink-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold mb-8 animate-bounce" data-aos="fade-right">
+              <div
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-red-100 to-pink-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold mb-8 animate-bounce"
+                data-aos="fade-right"
+              >
                 <Sparkles className="w-4 h-4" />
                 ثورة في شبكة التوصيل الجزائرية
               </div>
 
-              <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight" data-aos="fade-right">
+              <h1
+                className="text-5xl lg:text-7xl font-bold mb-8 leading-tight"
+                data-aos="fade-right"
+              >
                 <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
                   وصلي
                 </span>
@@ -163,28 +179,48 @@ const LandingPage = () => {
                 <span className="text-gray-900">تسليم ذكي</span>
               </h1>
 
-              <p className="text-xl text-gray-600 mb-10 max-w-2xl leading-relaxed" data-aos="fade-right">
+              <p
+                className="text-xl text-gray-600 mb-10 max-w-2xl leading-relaxed"
+                data-aos="fade-right"
+              >
                 منصة لوجستية لامركزية تربط البائعين ونقاط الترحيل والعملاء.
-                <span className="font-semibold text-red-600"> صفر تسليمات فاشلة.</span>
+                <span className="font-semibold text-red-600">
+                  {" "}
+                  صفر تسليمات فاشلة.
+                </span>
                 <span className="font-semibold text-pink-600"> أقصى راحة.</span>
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12" data-aos="fade-right">
-                <a href="#track" className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <div
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
+                data-aos="fade-right"
+              >
+                <a
+                  href="#track"
+                  className="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
                   <Truck className="w-6 h-6" />
                   تتبع طردك
                 </a>
-                <a href="#demo" className="inline-flex items-center justify-center gap-3 border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:border-red-500 hover:text-red-600 transition-all duration-300">
+                <a
+                  href="#demo"
+                  className="inline-flex items-center justify-center gap-3 border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-xl font-semibold text-lg hover:border-red-500 hover:text-red-600 transition-all duration-300"
+                >
                   <Play className="w-6 h-6" />
                   شاهد العرض التوضيحي
                 </a>
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8" data-aos="fade-right">
+              <div
+                className="grid grid-cols-2 lg:grid-cols-4 gap-8"
+                data-aos="fade-right"
+              >
                 {stats.map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
+                    <div className="text-3xl font-bold text-gray-900 mb-2">
+                      {stat.number}
+                    </div>
                     <div className="text-sm text-gray-600">{stat.label}</div>
                   </div>
                 ))}
@@ -201,7 +237,9 @@ const LandingPage = () => {
                     className="w-full h-80 object-cover rounded-2xl mb-6"
                   />
                   <div className="text-center">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">شبكة توصيل متطورة</h3>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      شبكة توصيل متطورة
+                    </h3>
                     <p className="text-gray-600">متصل. فعال. موثوق.</p>
                   </div>
                 </div>
@@ -219,7 +257,8 @@ const LandingPage = () => {
               لماذا تختار وصلي؟
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              نحن نحول تجربة التوصيل عبر الجزائر بالتكنولوجيا المبتكرة والشراكات المحلية
+              نحن نحول تجربة التوصيل عبر الجزائر بالتكنولوجيا المبتكرة والشراكات
+              المحلية
             </p>
           </div>
 
@@ -235,7 +274,9 @@ const LandingPage = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
@@ -243,14 +284,19 @@ const LandingPage = () => {
       </section>
 
       {/* How It Works Section */}
-      <section id="how" className="py-24 bg-gradient-to-br from-gray-50 to-red-50" data-aos="fade-up">
+      <section
+        id="how"
+        className="py-24 bg-gradient-to-br from-gray-50 to-red-50"
+        data-aos="fade-up"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               كيف يعمل
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              بسيط وفعال وموثوق - عمليتنا من أربع خطوات تضمن وصول طرودك إلى وجهتها
+              بسيط وفعال وموثوق - عمليتنا من أربع خطوات تضمن وصول طرودك إلى
+              وجهتها
             </p>
           </div>
 
@@ -265,7 +311,9 @@ const LandingPage = () => {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
                     {step.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                  <p className="text-gray-600 leading-relaxed">
+                    {step.description}
+                  </p>
                 </div>
               </div>
             ))}
@@ -338,7 +386,9 @@ const LandingPage = () => {
                   <div className="space-y-6">
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                      <span className="font-semibold text-gray-700">الحالة:</span>
+                      <span className="font-semibold text-gray-700">
+                        الحالة:
+                      </span>
                       <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium">
                         {result.status}
                       </span>
@@ -346,26 +396,40 @@ const LandingPage = () => {
                     <div className="flex items-start gap-3">
                       <MapPin className="w-5 h-5 text-red-600 mt-1" />
                       <div>
-                        <span className="font-semibold text-gray-700">نقطة الاستلام:</span>
+                        <span className="font-semibold text-gray-700">
+                          نقطة الاستلام:
+                        </span>
                         <p className="text-gray-600 mt-1">
-                          {result.relayId ? "Boutique El Amine" : "لم يتم التعيين بعد"}
+                          {result.order.relay_point}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
                       <Users className="w-5 h-5 text-red-600" />
-                      <span className="font-semibold text-gray-700">العميل:</span>
-                      <span className="text-gray-600">{result.client}</span>
+                      <span className="font-semibold text-gray-700">
+                        العميل:
+                      </span>
+                      <span className="text-gray-600">
+                        {result.order.client_name}
+                      </span>
                     </div>
                     <div className="flex items-center gap-3">
                       <Phone className="w-5 h-5 text-red-600" />
-                      <span className="font-semibold text-gray-700">الهاتف:</span>
-                      <span className="text-gray-600">{result.phone}</span>
+                      <span className="font-semibold text-gray-700">
+                        الهاتف:
+                      </span>
+                      <span className="text-gray-600">
+                        {result.order.client_phone}
+                      </span>
                     </div>
                     <div className="flex items-center gap-3">
                       <Globe className="w-5 h-5 text-red-600" />
-                      <span className="font-semibold text-gray-700">المنطقة:</span>
-                      <span className="text-gray-600">{result.region}</span>
+                      <span className="font-semibold text-gray-700">
+                        المنطقة:
+                      </span>
+                      <span className="text-gray-600">
+                        {result.order.client_address}
+                      </span>
                     </div>
                   </div>
 
@@ -392,7 +456,11 @@ const LandingPage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-24 bg-gradient-to-br from-red-50 to-pink-50" data-aos="fade-up">
+      <section
+        id="testimonials"
+        className="py-24 bg-gradient-to-br from-red-50 to-pink-50"
+        data-aos="fade-up"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
@@ -405,10 +473,16 @@ const LandingPage = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+              <div
+                key={index}
+                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+              >
                 <div className="flex items-center mb-6">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star
+                      key={i}
+                      className="w-5 h-5 text-yellow-400 fill-current"
+                    />
                   ))}
                 </div>
                 <p className="text-gray-700 mb-6 leading-relaxed italic">
@@ -421,7 +495,9 @@ const LandingPage = () => {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                    <h4 className="font-semibold text-gray-900">
+                      {testimonial.name}
+                    </h4>
                     <p className="text-sm text-gray-600">{testimonial.role}</p>
                   </div>
                 </div>
@@ -432,7 +508,10 @@ const LandingPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-red-600 to-pink-600" data-aos="fade-up">
+      <section
+        className="py-24 bg-gradient-to-r from-red-600 to-pink-600"
+        data-aos="fade-up"
+      >
         <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
             جاهز لتطوير أعمالك؟
@@ -459,22 +538,39 @@ const LandingPage = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center mb-6">
-                <img src={logoWhite} alt="Logo" className="w-32 h-32 object-contain mx-auto" />
+                <img
+                  src={logoWhite}
+                  alt="Logo"
+                  className="w-32 h-32 object-contain mx-auto"
+                />
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed max-w-md">
-                تحويل لوجستيات التوصيل عبر الجزائر، طرد واحد في كل مرة. نربط البائعين والعملاء بشبكة ذكية من نقاط الترحيل المحلية.
+                تحويل لوجستيات التوصيل عبر الجزائر، طرد واحد في كل مرة. نربط
+                البائعين والعملاء بشبكة ذكية من نقاط الترحيل المحلية.
               </p>
               <div className="flex space-x-4 space-x-reverse">
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors">
+                <a
+                  href="#"
+                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+                >
                   <Facebook className="w-5 h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors">
+                <a
+                  href="#"
+                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+                >
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors">
+                <a
+                  href="#"
+                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+                >
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors">
+                <a
+                  href="#"
+                  className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-red-600 transition-colors"
+                >
                   <Linkedin className="w-5 h-5" />
                 </a>
               </div>
@@ -483,10 +579,38 @@ const LandingPage = () => {
             <div>
               <h3 className="text-lg font-semibold mb-6">روابط سريعة</h3>
               <ul className="space-y-3">
-                <li><a href="#features" className="text-gray-400 hover:text-white transition-colors">الميزات</a></li>
-                <li><a href="#how" className="text-gray-400 hover:text-white transition-colors">كيف يعمل</a></li>
-                <li><a href="#track" className="text-gray-400 hover:text-white transition-colors">تتبع الطرد</a></li>
-                <li><a href="#testimonials" className="text-gray-400 hover:text-white transition-colors">آراء العملاء</a></li>
+                <li>
+                  <a
+                    href="#features"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    الميزات
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#how"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    كيف يعمل
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#track"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    تتبع الطرد
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#testimonials"
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    آراء العملاء
+                  </a>
+                </li>
               </ul>
             </div>
 
