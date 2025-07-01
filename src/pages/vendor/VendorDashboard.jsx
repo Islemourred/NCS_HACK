@@ -22,6 +22,7 @@ import VendorSettingsNotifications from "./VendorSettingsNotifications";
 import VendorSettingsDelivery from "./VendorSettingsDelivery";
 import VendorRelayPointsMap from "./VendorRelayPointsMap";
 import VendorOrdersTab from "./VendorOrdersTab";
+import { useNotification } from "../../components/NotificationProvider";
 
 const mockData = {
   stats: [
@@ -59,6 +60,7 @@ const vendorTabs = [
 
 const VendorDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const { showNotification } = useNotification();
 
   return (
     <div
@@ -78,7 +80,12 @@ const VendorDashboard = () => {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <button className="p-3 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-200 relative">
+            <button
+              className="p-3 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-200 relative"
+              onClick={() =>
+                showNotification("تم تسليم الطلب بنجاح!", "success")
+              }
+            >
               <BellIcon className="w-6 h-6 text-neutral-600" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-error-500 rounded-full"></span>
             </button>

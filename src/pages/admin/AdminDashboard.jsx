@@ -25,102 +25,12 @@ import RelaysTab from "./RelaysTab";
 import EmploymentTab from "./EmploymentTab";
 import UsersTab from "./UsersTab";
 import SettingsTab from "./SettingsTab";
-
-const mockData = {
-  stats: [
-    {
-      title: "إجمالي المستخدمين",
-      value: "1,247",
-      icon: UserGroupIcon,
-      color: "primary",
-      change: "+12%",
-    },
-    {
-      title: "نقاط الترحيل النشطة",
-      value: "89",
-      icon: BuildingStorefrontIcon,
-      color: "secondary",
-      change: "+5%",
-    },
-    {
-      title: "الطلبات اليومية",
-      value: "342",
-      icon: TruckIcon,
-      color: "success",
-      change: "+18%",
-    },
-    {
-      title: "الإيرادات الشهرية",
-      value: "45,320 د.ج",
-      icon: CurrencyDollarIcon,
-      color: "warning",
-      change: "+8%",
-    },
-  ],
-  recentOrders: [
-    {
-      id: "DZ001234",
-      client: "أحمد بن محمد",
-      relay: "متجر الأمين",
-      status: "delivered",
-      amount: "2,500 د.ج",
-    },
-    {
-      id: "DZ001235",
-      client: "فاطمة الزهراء",
-      relay: "سوبر ماركت النور",
-      status: "pending",
-      amount: "1,800 د.ج",
-    },
-    {
-      id: "DZ001236",
-      client: "يوسف العلي",
-      relay: "مكتبة المعرفة",
-      status: "shipped",
-      amount: "3,200 د.ج",
-    },
-    {
-      id: "DZ001237",
-      client: "زينب حسني",
-      relay: "صيدلية الشفاء",
-      status: "cancelled",
-      amount: "950 د.ج",
-    },
-  ],
-  relayPoints: [
-    {
-      id: 1,
-      name: "متجر الأمين",
-      location: "الجزائر العاصمة",
-      orders: 45,
-      status: "active",
-    },
-    {
-      id: 2,
-      name: "سوبر ماركت النور",
-      location: "وهران",
-      orders: 32,
-      status: "active",
-    },
-    {
-      id: 3,
-      name: "مكتبة المعرفة",
-      location: "قسنطينة",
-      orders: 28,
-      status: "inactive",
-    },
-    {
-      id: 4,
-      name: "صيدلية الشفاء",
-      location: "عنابة",
-      orders: 19,
-      status: "active",
-    },
-  ],
-};
+import GenerateRelaysTab from "./GenerateRelaysTab";
+import { useNotification } from "../../components/NotificationProvider";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const { showNotification } = useNotification();
   // Employment posts state (mock logic)
   const [employmentPosts, setEmploymentPosts] = useState([
     {
@@ -216,7 +126,12 @@ const AdminDashboard = () => {
             </p>
           </div>
           <div className="flex items-center gap-4">
-            <button className="p-3 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-200 relative">
+            <button
+              className="p-3 bg-white rounded-xl shadow-soft hover:shadow-medium transition-all duration-200 relative"
+              onClick={() =>
+                showNotification("تم تحديث حالة الطلب!", "success")
+              }
+            >
               <BellIcon className="w-6 h-6 text-neutral-600" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-error-500 rounded-full"></span>
             </button>
@@ -236,6 +151,11 @@ const AdminDashboard = () => {
               id: "relays",
               label: "نقاط الترحيل",
               icon: BuildingStorefrontIcon,
+            },
+            {
+              id: "generate-relays",
+              label: "توليد نقاط ترحيل",
+              icon: MapPinIcon,
             },
             { id: "employment", label: "طلبات نقاط الترحيل", icon: PlusIcon },
             { id: "users", label: "المستخدمين", icon: UserGroupIcon },
@@ -260,6 +180,8 @@ const AdminDashboard = () => {
         {activeTab === "overview" && <OverviewTab />}
         {/* Relay Points Tab */}
         {activeTab === "relays" && <RelaysTab />}
+        {/* Generate Relays Tab */}
+        {activeTab === "generate-relays" && <GenerateRelaysTab />}
         {/* Orders Tab */}
         {activeTab === "orders" && <OrdersTab />}
         {/* Employment Posts Tab */}

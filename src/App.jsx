@@ -17,6 +17,7 @@ import AuthLogin from "./pages/auth/AuthLogin";
 import AuthRegister from "./pages/auth/AuthRegister";
 import AdminRegister from "./pages/admin/AdminRegister";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+import { NotificationProvider } from "./components/NotificationProvider";
 
 function PrivateRoute({ children, role }) {
   const { user } = useAuth();
@@ -95,9 +96,11 @@ function AppLayout() {
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <AppLayout />
-      </Router>
+      <NotificationProvider>
+        <Router>
+          <AppLayout />
+        </Router>
+      </NotificationProvider>
     </AuthProvider>
   );
 }
