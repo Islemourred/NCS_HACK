@@ -30,16 +30,24 @@ const Navbar = () => {
           <Link to="/" className="flex items-center group h-20">
             <img src={logo} alt="Logo" className="w-32 h-32 object-contain mx-auto" />
           </Link>
+          
+          {/* New Links in the center */}
+          <div className="flex gap-12 items-center text-lg">
+            <a href="#features" className="text-gray-700 hover:text-red-700 focus:text-red-700 active:text-red-700">الميزات</a>
+            <a href="#how" className="text-gray-700 hover:text-red-700 focus:text-red-700 active:text-red-700">كيف يعمل</a>
+            <a href="#track" className="text-gray-700 hover:text-red-700 focus:text-red-700 active:text-red-700">تتبع الطرد</a>
+            <a href="#testimonials" className="text-gray-700 hover:text-red-700 focus:text-red-700 active:text-red-700">آراء العملاء</a>
+          </div>
 
           {/* Navigation Items */}
           <div className="flex gap-4 items-center">
             {!user && (
               <>
-                <Link to="/vendor/login" className="btn-primary gap-2">
+                <Link to="/vendor/login" className="bg-gradient-to-r from-red-600 to-pink-600 text-white btn-primary gap-2">
                   <ArrowRightOnRectangleIcon className="w-5 h-5" />
                   تسجيل الدخول
                 </Link>
-                <Link to="/vendor/register" className="btn-secondary gap-2">
+                <Link to="/vendor/register" className="bg-gradient-to-r from-red-100 to-pink-100 text-red-700 btn-secondary gap-2">
                   <UserPlusIcon className="w-5 h-5" />
                   انضم إلينا
                 </Link>
@@ -53,7 +61,7 @@ const Navbar = () => {
                   {user.role === "admin" && (
                     <Link
                       to="/admin/dashboard"
-                      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-neutral-100 to-neutral-200 text-neutral-700 font-semibold rounded-xl hover:from-neutral-200 hover:to-neutral-300 transition-all duration-200"
+                      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-100 to-pink-100 text-red-700 font-semibold rounded-xl hover:from-pink-100 hover:to-pink-200 transition-all duration-200"
                     >
                       <UserCircleIcon className="w-5 h-5" />
                       لوحة الإدارة
@@ -82,16 +90,16 @@ const Navbar = () => {
                 {/* User Info */}
                 <div className="flex items-center gap-3 pr-4 border-r border-neutral-200">
                   <div className="flex flex-col text-left">
-                    <span className="text-sm font-semibold text-neutral-700">
+                    <span className="text-sm font-semibold text-red-700">
                       {user.name}
                     </span>
-                    <span className="text-xs text-neutral-500 capitalize">
+                    <span className="text-xs text-pink-600 capitalize">
                       {user.role}
                     </span>
                   </div>
                   <button
                     onClick={handleLogout}
-                    className="p-2 bg-neutral-100 hover:bg-error-100 text-neutral-600 hover:text-error-600 rounded-xl transition-all duration-200 group flex items-center gap-2"
+                    className="p-2 bg-gradient-to-r from-red-600 to-pink-600 text-white hover:from-pink-600 hover:to-red-600 rounded-xl transition-all duration-200 group flex items-center gap-2"
                     title="تسجيل الخروج"
                   >
                     <ArrowRightOnRectangleIcon className="w-5 h-5 group-hover:-rotate-12 transition-transform duration-200" />
@@ -101,6 +109,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
+
         </div>
       </div>
     </nav>

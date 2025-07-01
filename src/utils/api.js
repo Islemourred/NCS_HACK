@@ -60,16 +60,6 @@ export async function register(userData) {
   return res.json();
 }
 
-export function getParcel(parcelId) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const parcel = parcels.find((p) => p.id === parcelId);
-      if (parcel) resolve(parcel);
-      else reject(new Error("Parcel not found"));
-    }, 500);
-  });
-}
-
 export function getUsers() {
   return new Promise((resolve) => setTimeout(() => resolve(users), 500));
 }
@@ -290,3 +280,38 @@ export async function updateVendor(id, data) {
 export async function deleteVendor(id) {
   await fetch(`${API_BASE}/vendors/${id}/`, { method: "DELETE" });
 }
+
+// Mock API function for demonstration
+export const getParcel = async (parcelId) => {
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  
+  // Mock data for demonstration
+  const mockParcels = {
+    'DZ123456789': {
+      id: 'DZ123456789',
+      status: 'جاهز للاستلام',
+      client: 'أحمد محمد',
+      phone: '+213 555 123 456',
+      region: 'الجزائر العاصمة',
+      relayId: 'RELAY001',
+      pin: '4726'
+    },
+    'DZ987654321': {
+      id: 'DZ987654321',
+      status: 'في الطريق',
+      client: 'فاطمة زهراء',
+      phone: '+213 666 789 012',
+      region: 'وهران',
+      relayId: null,
+      pin: '8534'
+    }
+  };
+  
+  const parcel = mockParcels[parcelId];
+  if (!parcel) {
+    throw new Error('Parcel not found');
+  }
+  
+  return parcel;
+};
