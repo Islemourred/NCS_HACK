@@ -11,6 +11,7 @@ import OverviewTab from "./OverviewTab";
 import ParcelsTab from "./ParcelsTab";
 import ProfileTab from "./ProfileTab";
 import SettingsTab from "./SettingsTab";
+import EmploymentApplications from "./EmploymentApplications";
 
 const RelayDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -48,6 +49,7 @@ const RelayDashboard = () => {
             { id: "relaypoints", label: "نقاط الترحيل", icon: MapPinIcon },
             { id: "profile", label: "الملف الشخصي", icon: UserIcon },
             { id: "settings", label: "الإعدادات", icon: CogIcon },
+            { id: "employment", label: "طلبات نقاط الترحيل", icon: TruckIcon },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -78,6 +80,9 @@ const RelayDashboard = () => {
 
         {/* Settings Tab */}
         {activeTab === "settings" && <SettingsTab />}
+
+        {/* Employment Applications */}
+        {activeTab === "employment" && <EmploymentApplications />}
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ import VendorProfileForm from "./VendorProfileForm";
 // import VendorRecentOrdersTable from "./VendorRecentOrdersTable";
 import VendorOrdersList from "./VendorOrdersList";
 import VendorRelayPointsList from "./VendorRelayPointsList";
+import VendorRelayPointsTab from "./VendorRelayPointsTab";
 import VendorPerformanceStats from "./VendorPerformanceStats";
 import VendorSettingsNotifications from "./VendorSettingsNotifications";
 import VendorSettingsDelivery from "./VendorSettingsDelivery";
@@ -266,24 +267,7 @@ const VendorDashboard = () => {
         )}
 
         {/* Relay Points Tab */}
-        {activeTab === "relay-points" && (
-          <div className="space-y-6">
-            <div className="flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-neutral-800">
-                نقاط الترحيل المتاحة
-              </h3>
-              <div className="relative">
-                <MagnifyingGlassIcon className="w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
-                <input
-                  type="text"
-                  placeholder="البحث في نقاط الترحيل..."
-                  className="input-field pr-10 w-64"
-                />
-              </div>
-            </div>
-            <VendorRelayPointsList relayPoints={mockData.relayPoints} />
-          </div>
-        )}
+        {activeTab === "relay-points" && <VendorRelayPointsTab />}
 
         {/*
 
