@@ -28,6 +28,11 @@ const mockEmploymentPosts = [
   },
 ];
 
+const mockUserRelayPoints = [
+  { id: 1, name: "شارع ديدوش مراد، الجزائر العاصمة" },
+  { id: 2, name: "حي الأمير عبد القادر، وهران" },
+];
+
 const STATUS_LABELS = {
   PENDING: "قيد المراجعة",
   APPROVED: "مقبول",
@@ -44,6 +49,7 @@ const EmploymentApplications = () => {
     opening_hours: "",
     contact_phone: "",
     motivation: "",
+    relay_point_name: "",
     store_image: null,
     commerce_register: null,
     id_card: null,
@@ -69,6 +75,7 @@ const EmploymentApplications = () => {
         opening_hours: form.opening_hours,
         contact_phone: form.contact_phone,
         motivation: form.motivation,
+        relay_point_name: form.relay_point_name,
         status: "PENDING",
         applied_at: new Date().toISOString(),
         store_image: form.store_image,
@@ -83,6 +90,7 @@ const EmploymentApplications = () => {
       opening_hours: "",
       contact_phone: "",
       motivation: "",
+      relay_point_name: "",
       store_image: null,
       commerce_register: null,
       id_card: null,
@@ -204,6 +212,25 @@ const EmploymentApplications = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-semibold mb-1">
+                      اسم نقطة الترحيل
+                    </label>
+                    <select
+                      name="relay_point_name"
+                      className="input-field"
+                      value={form.relay_point_name}
+                      onChange={handleFormChange}
+                      required
+                    >
+                      <option value="">اختر نقطة الترحيل</option>
+                      {mockUserRelayPoints.map((point) => (
+                        <option key={point.id} value={point.name}>
+                          {point.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-1">
                       صورة المحل
                     </label>
                     <input
@@ -288,6 +315,7 @@ const EmploymentApplications = () => {
                 <th className="py-3 text-right">صورة المحل</th>
                 <th className="py-3 text-right">سجل تجاري</th>
                 <th className="py-3 text-right">بطاقة الهوية</th>
+                <th className="py-3 text-right">اسم نقطة الترحيل</th>
               </tr>
             </thead>
             <tbody>
@@ -328,6 +356,7 @@ const EmploymentApplications = () => {
                     <td className="py-3">
                       {app.id_card ? app.id_card.name : "-"}
                     </td>
+                    <td className="py-3">{app.relay_point_name}</td>
                   </tr>
                 );
               })}
