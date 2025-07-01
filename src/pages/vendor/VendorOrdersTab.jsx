@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import VendorOrdersList from "./VendorOrdersList";
-import { MagnifyingGlassIcon, PlusIcon } from "@heroicons/react/24/outline";
+import {
+  MagnifyingGlassIcon,
+  PlusIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/outline";
 
 const STATUS_LABELS = {
   CREATED: "تم الإنشاء",
@@ -27,6 +31,33 @@ const STATUS_COLORS = {
   LOST: "red",
   DAMAGED: "red",
 };
+
+const RELAY_POINTS = [
+  {
+    id: 1,
+    name: "متجر الأمين",
+    address: "شارع ديدوش مراد، الجزائر العاصمة",
+    wilaya: { code: "16", name: "الجزائر العاصمة" },
+  },
+  {
+    id: 2,
+    name: "سوبر ماركت النور",
+    address: "حي الأمير عبد القادر، وهران",
+    wilaya: { code: "31", name: "وهران" },
+  },
+  {
+    id: 3,
+    name: "مكتبة المعرفة",
+    address: "حي أول نوفمبر، قسنطينة",
+    wilaya: { code: "25", name: "قسنطينة" },
+  },
+  {
+    id: 4,
+    name: "صيدلية الشفاء",
+    address: "حي الثورة، عنابة",
+    wilaya: { code: "23", name: "عنابة" },
+  },
+];
 
 const initialOrders = [
   {
@@ -266,13 +297,23 @@ const VendorOrdersTab = () => {
               </div>
               <div>
                 <label className="block mb-1 font-semibold">نقطة الترحيل</label>
-                <input
-                  name="order.relay_point"
-                  className="input-field w-full"
-                  value={form.order.relay_point}
-                  onChange={handleFormChange}
-                  required
-                />
+                <div className="relative w-full">
+                  <select
+                    name="order.relay_point"
+                    className="input-field appearance-none w-full pl-3 pr-8 py-2 rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition"
+                    value={form.order.relay_point}
+                    onChange={handleFormChange}
+                    required
+                  >
+                    <option value="">اختر نقطة الترحيل</option>
+                    {RELAY_POINTS.map((pt) => (
+                      <option key={pt.id} value={pt.name}>
+                        {pt.name} - {pt.address}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDownIcon className="w-5 h-5 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400" />
+                </div>
               </div>
               <div>
                 <label className="block mb-1 font-semibold">الحالة</label>

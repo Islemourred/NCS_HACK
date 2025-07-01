@@ -7,6 +7,7 @@ import {
   PencilIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
+import { RELAY_POINTS } from "../../utils/relayPointsData";
 
 const STATUS_CHOICES = [
   { value: "PENDING", label: "قيد المراجعة" },
@@ -35,51 +36,8 @@ const getStatusText = (status) => {
   return found ? found.label : status;
 };
 
-const initialRelayPoints = [
-  {
-    id: 1,
-    address: "شارع ديدوش مراد، الجزائر العاصمة",
-    wilaya: { code: "16", name: "الجزائر العاصمة" },
-    opening_hours: "09:00 - 19:00",
-    contact_phone: "+213 555 123 456",
-    status: "APPROVED",
-    latitude: "36.752887",
-    longitude: "3.042048",
-  },
-  {
-    id: 2,
-    address: "حي الأمير عبد القادر، وهران",
-    wilaya: { code: "31", name: "وهران" },
-    opening_hours: "08:00 - 18:00",
-    contact_phone: "+213 555 654 321",
-    status: "PENDING",
-    latitude: "35.697654",
-    longitude: "-0.633737",
-  },
-  {
-    id: 3,
-    address: "حي أول نوفمبر، قسنطينة",
-    wilaya: { code: "25", name: "قسنطينة" },
-    opening_hours: "10:00 - 17:00",
-    contact_phone: "+213 555 987 654",
-    status: "REJECTED",
-    latitude: "36.365",
-    longitude: "6.6147",
-  },
-  {
-    id: 4,
-    address: "حي الثورة، عنابة",
-    wilaya: { code: "23", name: "عنابة" },
-    opening_hours: "09:00 - 20:00",
-    contact_phone: "+213 555 321 987",
-    status: "BLOCKED",
-    latitude: "36.9",
-    longitude: "7.7667",
-  },
-];
-
 const RelaysTab = () => {
-  const [relayPoints, setRelayPoints] = useState(initialRelayPoints);
+  const [relayPoints, setRelayPoints] = useState(RELAY_POINTS);
   const [search, setSearch] = useState("");
   const [editId, setEditId] = useState(null);
   const [editStatus, setEditStatus] = useState("");

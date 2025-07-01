@@ -1,4 +1,11 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import {
+  PencilIcon,
+  TrashIcon,
+  XMarkIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/24/outline";
+import { RELAY_POINTS } from "../../utils/relayPointsData";
 
 const STATUS_CHOICES = [
   { value: "PENDING", label: "قيد المراجعة" },
@@ -15,28 +22,7 @@ const WILAYA_LIST = [
 ];
 
 function RelayPointsCRUD() {
-  const [relayPoints, setRelayPoints] = React.useState([
-    {
-      id: 1,
-      address: "شارع ديدوش مراد، الجزائر العاصمة",
-      wilaya: { code: "16", name: "الجزائر العاصمة" },
-      opening_hours: "09:00 - 19:00",
-      contact_phone: "+213 555 123 456",
-      status: "APPROVED",
-      latitude: "23.25",
-      longitude: "25",
-    },
-    {
-      id: 2,
-      address: "حي الأمير عبد القادر، وهران",
-      wilaya: { code: "31", name: "وهران" },
-      opening_hours: "08:00 - 18:00",
-      contact_phone: "+213 555 654 321",
-      status: "PENDING",
-      latitude: "50",
-      longitude: "30",
-    },
-  ]);
+  const [relayPoints, setRelayPoints] = React.useState(RELAY_POINTS);
   const [modalOpen, setModalOpen] = React.useState(false);
   const [editId, setEditId] = React.useState(null);
   const [form, setForm] = React.useState({
@@ -49,6 +35,16 @@ function RelayPointsCRUD() {
     longitude: "",
   });
   const [deleteId, setDeleteId] = React.useState(null);
+  const modalFormRef = useRef(null);
+
+  useEffect(() => {
+    if (modalOpen && modalFormRef.current) {
+      modalFormRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [modalOpen]);
 
   const openAdd = () => {
     setEditId(null);
@@ -106,9 +102,10 @@ function RelayPointsCRUD() {
           + إضافة نقطة ترحيل
         </button>
       </div>
-      <div className="overflow-x-auto">
+      {/* Table Container */}
+      <div className="bg-white rounded-xl shadow p-4 overflow-x-auto">
         <table className="w-full">
-          <thead>
+          <thead className="bg-neutral-50 sticky top-0 z-10">
             <tr className="border-b border-neutral-200">
               <th className="py-3 text-right">العنوان</th>
               <th className="py-3 text-right">الولاية</th>
@@ -121,10 +118,12 @@ function RelayPointsCRUD() {
             </tr>
           </thead>
           <tbody>
-            {relayPoints.map((relay) => (
+            {relayPoints.map((relay, idx) => (
               <tr
                 key={relay.id}
-                className="border-b border-neutral-100 hover:bg-neutral-50"
+                className={`border-b border-neutral-100 hover:bg-primary-50 transition ${
+                  idx % 2 === 0 ? "bg-neutral-50" : "bg-white"
+                }`}
               >
                 <td className="py-3">{relay.address}</td>
                 <td className="py-3">
@@ -135,9 +134,7 @@ function RelayPointsCRUD() {
                   <span dir="ltr">{relay.contact_phone}</span>
                 </td>
                 <td className="py-3">
-                  <span
-                    className={`px-3 py-1 rounded-full text-xs font-semibold bg-primary-100 text-primary-700`}
-                  >
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary-100 text-primary-700">
                     {
                       STATUS_CHOICES.find((s) => s.value === relay.status)
                         ?.label
@@ -153,16 +150,16 @@ function RelayPointsCRUD() {
                 <td className="py-3">
                   <div className="flex gap-2">
                     <button
-                      className="btn-secondary px-3 py-1"
+                      className="btn-secondary flex items-center gap-1 px-3 py-1"
                       onClick={() => openEdit(relay)}
                     >
-                      تعديل
+                      <PencilIcon className="w-4 h-4" /> تعديل
                     </button>
                     <button
-                      className="btn-error px-3 py-1"
+                      className="btn-error flex items-center gap-1 px-3 py-1"
                       onClick={() => setDeleteId(relay.id)}
                     >
-                      حذف
+                      <TrashIcon className="w-4 h-4" /> حذف
                     </button>
                   </div>
                 </td>
@@ -170,7 +167,10 @@ function RelayPointsCRUD() {
             ))}
             {relayPoints.length === 0 && (
               <tr>
-                <td colSpan={8} className="py-6 text-center text-neutral-400">
+                <td
+                  colSpan={8}
+                  className="py-6 text-center text-neutral-400 bg-white"
+                >
                   لا توجد نقاط ترحيل بعد.
                 </td>
               </tr>
@@ -180,19 +180,32 @@ function RelayPointsCRUD() {
       </div>
       {/* Modal for Add/Edit */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+        <div
+          className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50"
+          onClick={closeModal}
+        >
           <form
-            className="bg-white rounded-xl p-8 w-full max-w-lg space-y-4 shadow-lg"
+            ref={modalFormRef}
+            className="bg-white rounded-xl p-8 w-full max-w-lg space-y-4 shadow-lg relative max-h-[80vh] overflow-y-auto"
             onSubmit={handleSubmit}
+            onClick={(e) => e.stopPropagation()}
           >
+            <button
+              type="button"
+              className="absolute top-4 left-4 text-neutral-400 hover:text-neutral-600"
+              onClick={closeModal}
+            >
+              <XMarkIcon className="w-6 h-6" />
+            </button>
             <h4 className="text-xl font-bold mb-4">
               {editId ? "تعديل نقطة الترحيل" : "إضافة نقطة ترحيل"}
             </h4>
+            <hr className="mb-4" />
             <div>
               <label className="block mb-1 font-semibold">العنوان</label>
               <input
                 name="address"
-                className="input-field w-full"
+                className="input-field w-full rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition"
                 value={form.address}
                 onChange={handleChange}
                 required
@@ -200,25 +213,28 @@ function RelayPointsCRUD() {
             </div>
             <div>
               <label className="block mb-1 font-semibold">الولاية</label>
-              <select
-                name="wilaya"
-                className="input-field w-full"
-                value={form.wilaya.code}
-                onChange={handleWilayaChange}
-                required
-              >
-                {WILAYA_LIST.map((w) => (
-                  <option key={w.code} value={w.code}>
-                    {w.name} ({w.code})
-                  </option>
-                ))}
-              </select>
+              <div className="relative w-full">
+                <select
+                  name="wilaya"
+                  className="input-field appearance-none w-full pl-3 pr-8 py-2 rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition"
+                  value={form.wilaya.code}
+                  onChange={handleWilayaChange}
+                  required
+                >
+                  {WILAYA_LIST.map((w) => (
+                    <option key={w.code} value={w.code}>
+                      {w.name} ({w.code})
+                    </option>
+                  ))}
+                </select>
+                <ChevronDownIcon className="w-5 h-5 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400" />
+              </div>
             </div>
             <div>
               <label className="block mb-1 font-semibold">ساعات العمل</label>
               <input
                 name="opening_hours"
-                className="input-field w-full"
+                className="input-field w-full rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition"
                 value={form.opening_hours}
                 onChange={handleChange}
                 required
@@ -228,7 +244,7 @@ function RelayPointsCRUD() {
               <label className="block mb-1 font-semibold">رقم الهاتف</label>
               <input
                 name="contact_phone"
-                className="input-field w-full font-mono"
+                className="input-field w-full font-mono rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition"
                 value={form.contact_phone}
                 onChange={handleChange}
                 required
@@ -237,19 +253,22 @@ function RelayPointsCRUD() {
             </div>
             <div>
               <label className="block mb-1 font-semibold">الحالة</label>
-              <select
-                name="status"
-                className="input-field w-full"
-                value={form.status}
-                onChange={handleChange}
-                required
-              >
-                {STATUS_CHOICES.map((s) => (
-                  <option key={s.value} value={s.value}>
-                    {s.label}
-                  </option>
-                ))}
-              </select>
+              <div className="relative w-full">
+                <select
+                  name="status"
+                  className="input-field appearance-none w-full pl-3 pr-8 py-2 rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition"
+                  value={form.status}
+                  onChange={handleChange}
+                  required
+                >
+                  {STATUS_CHOICES.map((s) => (
+                    <option key={s.value} value={s.value}>
+                      {s.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDownIcon className="w-5 h-5 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400" />
+              </div>
             </div>
             <div>
               <label className="block mb-1 font-semibold">
@@ -261,7 +280,7 @@ function RelayPointsCRUD() {
                 step="0.000001"
                 min="-90"
                 max="90"
-                className="input-field w-full"
+                className="input-field w-full rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition"
                 value={form.latitude}
                 onChange={handleChange}
                 placeholder="مثال: 36.752887"
@@ -277,7 +296,7 @@ function RelayPointsCRUD() {
                 step="0.000001"
                 min="-180"
                 max="180"
-                className="input-field w-full"
+                className="input-field w-full rounded-lg border border-neutral-300 bg-white text-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary-300 focus:border-primary-400 transition"
                 value={form.longitude}
                 onChange={handleChange}
                 placeholder="مثال: 3.042048"
@@ -301,8 +320,16 @@ function RelayPointsCRUD() {
       {/* Delete Confirmation */}
       {deleteId && (
         <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-8 w-full max-w-md shadow-lg">
+          <div className="bg-white rounded-xl p-8 w-full max-w-md shadow-lg relative">
+            <button
+              type="button"
+              className="absolute top-4 left-4 text-neutral-400 hover:text-neutral-600"
+              onClick={() => setDeleteId(null)}
+            >
+              <XMarkIcon className="w-6 h-6" />
+            </button>
             <h4 className="text-lg font-bold mb-4">تأكيد الحذف</h4>
+            <hr className="mb-4" />
             <p className="mb-6">
               هل أنت متأكد أنك تريد حذف نقطة الترحيل هذه؟ لا يمكن التراجع عن هذا
               الإجراء.

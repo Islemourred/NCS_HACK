@@ -1,7 +1,7 @@
 import React from "react";
 
 const VendorRelayPointsList = ({ relayPoints }) => (
-  <div className="bg-white rounded-xl shadow-soft p-4 overflow-x-auto">
+  <div className="bg-white rounded-xl shadow-soft p-4 overflow-x-auto border ">
     <h4 className="text-lg font-bold mb-4">نقاط الترحيل</h4>
     <table className="min-w-full text-right">
       <thead>
@@ -28,4 +28,4 @@ const VendorRelayPointsList = ({ relayPoints }) => (
   </div>
 );
 
-export default VendorRelayPointsList; 
+export default VendorRelayPointsList;

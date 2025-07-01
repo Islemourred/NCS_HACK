@@ -5,26 +5,7 @@ import {
   InfoWindow,
   useJsApiLoader,
 } from "@react-google-maps/api";
-
-// Static coords + info for demo
-const relayPointsData = [
-  {
-    id: "1",
-    name: "متجر الأمين",
-    coords: { lat: 36.7538, lng: 3.0588 },
-    address: "شارع ديدوش مراد، الجزائر",
-    hours: "9 صباحاً – 8 مساءً",
-    contact: "021-123456",
-  },
-  {
-    id: "2",
-    name: "سوبر ماركت النور",
-    coords: { lat: 35.6971, lng: -0.6308 },
-    address: "طريق وهران، وهران",
-    hours: "8 صباحاً – 9 مساءً",
-    contact: "041-654321",
-  },
-];
+import { RELAY_POINTS } from "../../utils/relayPointsData";
 
 const containerStyle = {
   width: "100%",
@@ -33,7 +14,7 @@ const containerStyle = {
 };
 const center = { lat: 36.5, lng: 4.5 };
 const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-
+console.log(RELAY_POINTS);
 export default function VendorRelayPointsMap() {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: apiKey,
@@ -51,10 +32,10 @@ export default function VendorRelayPointsMap() {
       zoom={6}
       onClick={() => setSelectedPoint(null)} // close info on map click
     >
-      {relayPointsData.map((pt) => (
+      {RELAY_POINTS.map((pt) => (
         <Marker
           key={pt.id}
-          position={pt.coords}
+          position={{ lat: Number(pt.latitude), lng: Number(pt.longitude) }}
           label={{
             text: pt.name,
             fontWeight: "bold",

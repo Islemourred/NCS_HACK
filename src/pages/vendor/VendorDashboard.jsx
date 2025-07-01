@@ -8,8 +8,11 @@ import {
   XCircleIcon,
   PlusIcon,
   BellIcon,
+  MapPinIcon,
+  UserIcon,
+  CogIcon,
 } from "@heroicons/react/24/outline";
-import VendorTabsNav from "./VendorTabsNav";
+// import VendorTabsNav from "./VendorTabsNav";
 import VendorStatsGrid from "./VendorStatsGrid";
 import VendorProfileForm from "./VendorProfileForm";
 // import VendorRecentOrdersTable from "./VendorRecentOrdersTable";
@@ -124,53 +127,16 @@ const mockData = {
   ],
 };
 
+const vendorTabs = [
+  { id: "overview", label: "نظرة عامة", icon: ShoppingBagIcon },
+  { id: "orders", label: "الطلبات", icon: TruckIcon },
+  { id: "relay-points", label: "نقاط الترحيل", icon: MapPinIcon },
+  { id: "profile", label: "الملف الشخصي", icon: UserIcon },
+  { id: "settings", label: "الإعدادات", icon: CogIcon },
+];
+
 const VendorDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "delivered":
-        return "success";
-      case "shipping":
-        return "primary";
-      case "pending":
-        return "warning";
-      case "cancelled":
-        return "error";
-      default:
-        return "neutral";
-    }
-  };
-
-  const getStatusText = (status) => {
-    switch (status) {
-      case "delivered":
-        return "تم التسليم";
-      case "shipping":
-        return "قيد التوصيل";
-      case "pending":
-        return "في الانتظار";
-      case "cancelled":
-        return "ملغي";
-      default:
-        return status;
-    }
-  };
-
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case "delivered":
-        return CheckCircleIcon;
-      case "shipping":
-        return TruckIcon;
-      case "pending":
-        return ClockIcon;
-      case "cancelled":
-        return XCircleIcon;
-      default:
-        return ClockIcon;
-    }
-  };
 
   return (
     <div
@@ -202,7 +168,22 @@ const VendorDashboard = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <VendorTabsNav activeTab={activeTab} setActiveTab={setActiveTab} />
+        <div className="flex gap-2 mb-8 overflow-x-auto">
+          {vendorTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 whitespace-nowrap ${
+                activeTab === tab.id
+                  ? "bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-medium"
+                  : "bg-white text-neutral-700 hover:bg-primary-50 shadow-soft"
+              }`}
+            >
+              <tab.icon className="w-5 h-5" />
+              {tab.label}
+            </button>
+          ))}
+        </div>
 
         {/* Overview Tab */}
         {activeTab === "overview" && (
@@ -225,9 +206,7 @@ const VendorDashboard = () => {
         {/* Relay Points Tab */}
         {activeTab === "relay-points" && <VendorRelayPointsTab />}
 
-        {/*
-
-Profile Tab */}
+        {/* Profile Tab */}
         {activeTab === "profile" && (
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-neutral-800">
