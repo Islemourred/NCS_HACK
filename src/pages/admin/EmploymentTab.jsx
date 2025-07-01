@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { getEmploymentApplications } from "../../utils/employmentApplicationsData";
+import {} from "../../utils/relayPointsData";
 
 const STATUS_LABELS = {
   PENDING: "قيد المراجعة",
@@ -6,6 +8,26 @@ const STATUS_LABELS = {
   REJECTED: "مرفوض",
   BLOCKED: "محظور",
 };
+
+// Vite: eager import all images in assets/relay
+const imageModules = import.meta.glob("../../assets/relay/*", {
+  eager: true,
+  as: "url",
+});
+const imageUrlMap = Object.fromEntries(
+  Object.entries(imageModules).map(([path, url]) => [
+    path.split("/").pop(),
+    url,
+  ])
+);
+
+function getImageUrl(filename) {
+  if (!filename) return null;
+  const entry = Object.entries(imageModules).find(([path]) =>
+    path.endsWith(filename)
+  );
+  return entry ? entry[1] : null;
+}
 
 const EmploymentTab = ({
   employmentPosts,
@@ -15,51 +37,10 @@ const EmploymentTab = ({
   getStatusColor,
   getStatusText,
 }) => {
-  // Mock applications data
-  const [applications, setApplications] = useState([
-    {
-      id: 1,
-      employment_post: 1,
-      relay_point_name: "نقطة ترحيل العاصمة",
-      address: "شارع ديدوش مراد، الجزائر العاصمة",
-      wilaya: { code: "16", name: "الجزائر العاصمة" },
-      opening_hours: "09:00 - 19:00",
-      contact_phone: "+213 555 123 456",
-      motivation: "أرغب في تشغيل نقطة الترحيل لخبرتي في المجال.",
-      status: "PENDING",
-      applied_at: new Date().toISOString(),
-      store_image: {
-        name: "store1.jpg",
-        url: "https://via.placeholder.com/150",
-      },
-      commerce_register: {
-        name: "register1.jpg",
-        url: "https://via.placeholder.com/150",
-      },
-      id_card: { name: "id1.jpg", url: "https://via.placeholder.com/150" },
-    },
-    {
-      id: 2,
-      employment_post: 1,
-      relay_point_name: "نقطة ترحيل بديلة",
-      address: "حي آخر، الجزائر العاصمة",
-      wilaya: { code: "16", name: "الجزائر العاصمة" },
-      opening_hours: "10:00 - 18:00",
-      contact_phone: "+213 555 654 321",
-      motivation: "لدي محل مناسب وأرغب في الانضمام.",
-      status: "PENDING",
-      applied_at: new Date().toISOString(),
-      store_image: {
-        name: "store2.jpg",
-        url: "https://via.placeholder.com/150",
-      },
-      commerce_register: {
-        name: "register2.jpg",
-        url: "https://via.placeholder.com/150",
-      },
-      id_card: { name: "id2.jpg", url: "https://via.placeholder.com/150" },
-    },
-  ]);
+  // Use the shared data file for applications
+  const [applications, setApplications] = useState(
+    getEmploymentApplications(imageUrlMap)
+  );
 
   const [detailsApp, setDetailsApp] = useState(null);
 
@@ -256,7 +237,7 @@ const EmploymentTab = ({
                                     قبول
                                   </button>
                                   <button
-                                    className="btn-error btn-xs"
+                                    className="btn-sec btn-xs"
                                     onClick={() =>
                                       handleDecision(
                                         app.id,
@@ -327,7 +308,7 @@ const EmploymentTab = ({
                 <br />
                 {detailsApp.store_image && (
                   <img
-                    src={detailsApp.store_image.url}
+                    src={getImageUrl(detailsApp.store_image.name)}
                     alt="store"
                     className="mt-1 rounded shadow w-32 h-32 object-cover"
                   />
@@ -338,7 +319,7 @@ const EmploymentTab = ({
                 <br />
                 {detailsApp.commerce_register && (
                   <img
-                    src={detailsApp.commerce_register.url}
+                    src={getImageUrl(detailsApp.commerce_register.name)}
                     alt="register"
                     className="mt-1 rounded shadow w-32 h-32 object-cover"
                   />
@@ -349,7 +330,7 @@ const EmploymentTab = ({
                 <br />
                 {detailsApp.id_card && (
                   <img
-                    src={detailsApp.id_card.url}
+                    src={getImageUrl(detailsApp.id_card.name)}
                     alt="id card"
                     className="mt-1 rounded shadow w-32 h-32 object-cover"
                   />

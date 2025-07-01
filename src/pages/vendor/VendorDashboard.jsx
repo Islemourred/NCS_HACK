@@ -23,49 +23,6 @@ import VendorSettingsDelivery from "./VendorSettingsDelivery";
 import VendorRelayPointsMap from "./VendorRelayPointsMap";
 import VendorOrdersTab from "./VendorOrdersTab";
 
-const orderData = [
-  {
-    vendor: "متجر الإلكترونيات الذكية",
-    relay_point: "متجر الأمين",
-    product: "هاتف ذكي سامسونج S23",
-    client_name: "فاطمة الزهراء",
-    client_phone: "+213 555 123 456",
-    client_address: "حي النصر، الجزائر العاصمة",
-    status: "delivered",
-    tracking_id: "DZ123456789",
-  },
-  {
-    vendor: "سوبر ماركت النور",
-    relay_point: "سوبر ماركت النور",
-    product: "مكيف هواء LG",
-    client_name: "يوسف العلي",
-    client_phone: "+213 555 654 321",
-    client_address: "شارع الجمهورية، وهران",
-    status: "shipping",
-    tracking_id: "DZ987654321",
-  },
-  {
-    vendor: "مكتبة المعرفة",
-    relay_point: "مكتبة المعرفة",
-    product: "كتاب برمجة بايثون",
-    client_name: "زينب حسني",
-    client_phone: "+213 555 789 123",
-    client_address: "حي الزهور، قسنطينة",
-    status: "pending",
-    tracking_id: "DZ456789123",
-  },
-  {
-    vendor: "صيدلية الشفاء",
-    relay_point: "صيدلية الشفاء",
-    product: "جهاز قياس الضغط",
-    client_name: "محمد الأمين",
-    client_phone: "+213 555 321 987",
-    client_address: "حي السلام، عنابة",
-    status: "cancelled",
-    tracking_id: "DZ321987654",
-  },
-];
-
 const mockData = {
   stats: [
     {
@@ -88,41 +45,6 @@ const mockData = {
       icon: CheckCircleIcon,
       color: "success",
       change: "+22%",
-    },
-  ],
-  recentOrders: orderData,
-  relayPoints: [
-    {
-      id: 1,
-      name: "متجر الأمين",
-      location: "الجزائر العاصمة",
-      distance: "2.5 كم",
-      rating: 4.8,
-      orders: 45,
-    },
-    {
-      id: 2,
-      name: "سوبر ماركت النور",
-      location: "وهران",
-      distance: "1.2 كم",
-      rating: 4.6,
-      orders: 32,
-    },
-    {
-      id: 3,
-      name: "مكتبة المعرفة",
-      location: "قسنطينة",
-      distance: "3.8 كم",
-      rating: 4.9,
-      orders: 28,
-    },
-    {
-      id: 4,
-      name: "صيدلية الشفاء",
-      location: "عنابة",
-      distance: "0.8 كم",
-      rating: 4.7,
-      orders: 19,
     },
   ],
 };

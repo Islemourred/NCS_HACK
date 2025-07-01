@@ -68,45 +68,6 @@ const mockData = {
   ],
 };
 
-const getStatusColor = (status) => {
-  switch (status) {
-    case "delivered":
-      return "success";
-    case "waiting":
-      return "warning";
-    case "expired":
-      return "error";
-    default:
-      return "neutral";
-  }
-};
-
-const getStatusText = (status) => {
-  switch (status) {
-    case "delivered":
-      return "تم التسليم";
-    case "waiting":
-      return "في الانتظار";
-    case "expired":
-      return "منتهي الصلاحية";
-    default:
-      return status;
-  }
-};
-
-const getStatusIcon = (status) => {
-  switch (status) {
-    case "delivered":
-      return CheckCircleIcon;
-    case "waiting":
-      return ClockIcon;
-    case "expired":
-      return ExclamationTriangleIcon;
-    default:
-      return ClockIcon;
-  }
-};
-
 const OverviewTab = () => (
   <div className="space-y-8">
     {/* Stats Grid */}

@@ -1,30 +1,5 @@
 const API_BASE = "http://localhost:8000/api_users"; // Updated to match backend route
 
-// Mock API utility for ColisPoint DZ
-const users = [
-  {
-    id: 1,
-    email: "test@test.com",
-    password: "123123",
-    role: "admin",
-    name: "Admin User",
-  },
-  {
-    id: 2,
-    email: "test@test.com",
-    password: "123123",
-    role: "vendor",
-    name: "Vendor User",
-  },
-  {
-    id: 3,
-    email: "test@test.com",
-    password: "123123",
-    role: "relay",
-    name: "Relay Operator",
-  },
-];
-
 let parcels = [
   {
     id: "DZ123456789",
